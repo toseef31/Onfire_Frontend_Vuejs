@@ -1,8 +1,8 @@
 <template>
-    <div style="height:100%;background-color: #475467">
+    <div>
       
       <VenuPageHeader/>
-      <MenuText/>
+      <EventPoint/>
       <FooterMain/>
     </div>
   </template>
@@ -10,15 +10,15 @@
   <script>
   // @ is an alias to /src
   import VenuPageHeader from '@/components/VenuPageHeader.vue'
-  import MenuText from '@/components/MenuText.vue'
+  import EventPoint from '@/components/EventPoint.vue'
   import FooterMain from '@/components/FooterMain.vue'
   
   export default {
-    name: 'MenuTextPage',
+    name: 'ProductPage',
     components: {
         VenuPageHeader,
-        MenuText,
-        FooterMain
+        EventPoint,
+      FooterMain
     }
   }
   </script>

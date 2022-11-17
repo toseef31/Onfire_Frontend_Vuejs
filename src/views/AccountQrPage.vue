@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div  style="background-color:#475467;height:100vh;">
       
       <VenuPageHeader/>
       <AccountQr/>

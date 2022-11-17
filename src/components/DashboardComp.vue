@@ -11,7 +11,7 @@
     <h5 class="black--text">Wallet</h5></div></router-link>
 </v-col>
 <v-col  cols="4" class="px-1 py-1">
-    <router-link to="/AccountPurchasePage"> <div class="imgs"><img width="56%" src="@/assets/purchase.png" />
+    <router-link to="/AccountPurchasePage"> <div class="imgs"><img width="58%" src="@/assets/purchase.png" />
     <h5 class="black--text">My Purchases</h5></div></router-link>
 </v-col>
 
@@ -26,7 +26,7 @@
     <h5 class="black--text">My QR</h5></div></router-link>
 </v-col>
 <v-col  cols="4" class="px-1 py-1">
-    <router-link to="/SupportPage"> <div class="imgs"><img width="54%" src="@/assets/support.png" />
+    <router-link to="/SupportPage"> <div class="imgs"><img width="53%" src="@/assets/support.png" />
     <h5 class="black--text">Support</h5></div></router-link>
 </v-col>
 

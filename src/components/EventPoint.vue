@@ -4,7 +4,7 @@
 <v-row class="pb-8">
 <v-col class="pb-16">
           
-            <div class="pb-16 mt-1" ><img width="100%" src="@/assets/banner189.png" /></div>
+            <div class="pb-16 mt-14" ><img width="100%" src="@/assets/banner189.png" /></div>
             
         </v-col>
  </v-row>
@@ -13,7 +13,7 @@
         <p class="white--text float-left">Choose Where to order</p>
     </v-col>
     <v-col cols="6">
-        <router-link to="/MenuPage"> <p class="white--text float-right mr-2 mt-n1">View Menu<img width="23px" class="mb-n2 ml-3" src="@/assets/men.png" /></p></router-link>
+        <router-link to="/MenuPage"> <p class="white--text float-right mr-2">View Menu</p></router-link>
     </v-col>
  </v-row>
  </div>
@@ -52,17 +52,15 @@
 
 <script>
 export default {
-name:'GeneralBar',
+name:'EventPoint',
 }
 </script>
 
-<style scoped>
+<style>
 .imgstyle{
-    border: 0px solid #475467;
+    border: 4px solid #EF7E35;
     border-radius: 4px;
     padding: 20px;
     background-color: #D0D5DD;
-    
-box-shadow: 0px 0px -4px rgba(0, 0, 0, 0.8)!important;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="height:100%;background-color: #475467">
       
       <VenuPageHeader/>
       <CategoryCoroucel/>
