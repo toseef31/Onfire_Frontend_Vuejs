@@ -5,7 +5,7 @@
       <v-row>
         <v-col class="px-3 py-7">
           <div class="est">
-            <h3 class="black--text pb-4">ORDER IN</h3>
+            <h3 class="black--text pb-4">ORDER IN PROGRESS</h3>
             <p class="black--text float-left px-3">
               Pickup in aprox :<span class="font-weight-bold"> 8mins</span>
             </p>

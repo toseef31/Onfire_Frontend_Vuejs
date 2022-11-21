@@ -13,7 +13,7 @@
             <p class="white--text text-left pb-16">Avenida El Salto 5000, Huechuraba, Region Mero politana </p>
             </v-col>
             <v-col cols="2">
-                <v-icon color="#ffff">mdi-map-marker</v-icon>
+                <img class="mt-n2" width="100%" src="@/assets/google-maps.png" />
             </v-col>
             </v-row>
         </div>

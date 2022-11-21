@@ -17,7 +17,7 @@
         </v-col>
       </v-row>
     </div>
-    <div  class="pt-10 pb-16" style="height:100%;background-color: #475467">
+    <div  class="pt-10 pb-16" style="background-color: #475467">
     <v-row class="px-9">
       <v-col cols="1">
         <v-btn
@@ -111,7 +111,35 @@
     </v-row>
    
     </div>
-    <v-row style="background-color:#344054;height:100vh" class="pb-15">
+    <v-overlay
+          :absolute="absolute"
+          :opacity="opacity"
+          :value="overlay"
+          style="margin-top: -29%;"
+        >
+        <div class="px-3 py-5 mx-5" style="background-color:#344054;border-radius:6px;">
+        <p class="white-text my-6 text-center ">No Payment Method</p>
+         <p class="white-text my-7 text-center">You need to add a Payment method or top up your balance to pay for your order</p>
+         <router-link to="/MyWalletPage">
+         <v-btn
+          :class="`elevation-${hover ? 54 : 14}`"
+          block
+          color="#EF7E35" class=" py-6 text-h6 black--text"
+           
+          >
+           ADD A PAYMENT METHOD OR FUNDS
+          </v-btn> </router-link>
+         <p
+         
+          block
+          color="rgb(239 126 53 / 0%)" class=" py-6 text-h6 white--text mb-0 text-center"
+            @click="overlay = false"
+          >
+           Cancel
+        </p>
+          </div>
+        </v-overlay>
+    <v-row style="background-color:#344054;" class="pb-15">
         <v-col class="px-9">
             <v-text-field
             v-model="Coupon"
@@ -122,7 +150,7 @@
             required
           ></v-text-field>
             <p class="white--text float-left mt-1">Discount: $750</p>
-            <v-btn color="#EF7E35" class="px-10 py-8">PAY FOR YOUR 2 DRINKS - $50.50</v-btn>
+            <v-btn @click="overlay = !overlay" color="#EF7E35" class="px-10 py-8">PAY FOR YOUR 2 DRINKS - $50.50</v-btn>
         </v-col>
     </v-row>
   </div>
@@ -133,6 +161,9 @@ export default {
   name: "CartComp",
   data() {
     return {
+      absolute: true,
+      opacity: 0,
+      overlay: false,
       counter: 0,
     };
   },
@@ -177,7 +208,7 @@ p{
 }
 .v-btn {
   text-decoration: none;
-  font-size: 14px;
+  font-size: 14px!important;
   font-weight: 700;
 }
 .est {

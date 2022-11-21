@@ -1,10 +1,8 @@
 <template>
-    <div style="height: auto;
-    min-height: 100vh;background-color: #475467">
+    <div>
       
       <VenuPageHeader/>
-      <CategoryCoroucel/>
-      <CartComp/>
+      <EventPoint/>
       <FooterMain/>
     </div>
   </template>
@@ -12,17 +10,15 @@
   <script>
   // @ is an alias to /src
   import VenuPageHeader from '@/components/VenuPageHeader.vue'
-  import CartComp from '@/components/CartComp.vue'
-  import CategoryCoroucel from '@/components/CategoryCoroucel.vue'
+  import EventPoint from '@/components/EventPoint.vue'
   import FooterMain from '@/components/FooterMain.vue'
   
   export default {
     name: 'ProductPage',
     components: {
         VenuPageHeader,
-        CategoryCoroucel,
-        CartComp,
-        FooterMain
+        EventPoint,
+      FooterMain
     }
   }
   </script>

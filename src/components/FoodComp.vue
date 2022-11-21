@@ -55,7 +55,7 @@
                 <h4 class="white--text text-left text-uppercase" style="font-size:14px;font-weight: 500;">Melt Pizzas</h4>
               </v-row>
               <v-row>
-                <p class="white--text text-left ma-0 my-1" style="font-size:14px;">Las Majeso Pizzas Para </p>
+                <p class="white--text text-left ma-0 my-1" style="font-size:14px;">Las Majeso Pizzas Para satisfacer tu bajon de hambre</p>
               </v-row>
               <v-row>
                 <p class="white--text text-left ma-0 my-1" style="font-size:14px;">Esper Approx: 16 mins</p>

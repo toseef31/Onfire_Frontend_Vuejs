@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div style="height: auto;
+    min-height: 100vh;background-color: #475467">
       
       <VenuPageHeader/>
       <MenuText/>

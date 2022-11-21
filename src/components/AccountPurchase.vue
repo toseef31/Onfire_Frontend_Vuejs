@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="pa-2" style="background-color: #d0d5dd">
+    <div class="pa-2" style="background-color: #d0d5dd;height:100vh;">
       <div class="px-2 ma-0">
         <v-row class="pa-0 ma-0" style="background-color: #475467">
           <v-col class="px-0 py-0" >
