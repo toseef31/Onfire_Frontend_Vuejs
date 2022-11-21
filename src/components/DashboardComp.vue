@@ -3,30 +3,30 @@
       
       <v-row class="px-7 pt-10 pb-3" style="background-color: #475467;">
    <v-col  cols="4" class="px-1 py-1">
-    <router-link to="/SignUpPage"> <div class="imgs" :class="`elevation-${hover ? 54 : 6}`"><img width="55%" src="@/assets/profile.png" />
+    <router-link to="/SignUpPage"> <div class="imgs" :class="`elevation-${hover ? 54 : 6}`"><img width="61%" src="@/assets/group1.png" />
     <h5 class="black--text">My Profile</h5></div></router-link>
 </v-col>
 <v-col  cols="4" class="px-1 py-1">
-    <router-link to="/MyWalletPage"> <div class="imgs"><img width="50%" src="@/assets/wallet.png" />
+    <router-link to="/MyWalletPage"> <div class="imgs"><img width="53%" src="@/assets/group2.png" />
     <h5 class="black--text">Wallet</h5></div></router-link>
 </v-col>
 <v-col  cols="4" class="px-1 py-1">
-    <router-link to="/AccountPurchasePage"> <div class="imgs"><img width="58%" src="@/assets/purchase.png" />
+    <router-link to="/AccountPurchasePage"> <div class="imgs"><img width="58%" src="@/assets/group3.png" />
     <h5 class="black--text">My Purchases</h5></div></router-link>
 </v-col>
 
  </v-row>
  <v-row class="px-7 pb-10 pt-3" style="background-color: #475467;">
    <v-col  cols="4" class="px-1 py-1">
-    <router-link to="/IdPage"> <div class="imgs" :elevation="hover ? 24 : 6"><img width="70%" src="@/assets/ID.png" />
+    <router-link to="/IdPage"> <div class="imgs" :elevation="hover ? 24 : 6"><img width="71%" src="@/assets/group4.png" />
     <h5 class="black--text">ID Verification</h5></div></router-link>
 </v-col>
 <v-col  cols="4" class="px-1 py-1">
-    <router-link to="/AccountQrPage"> <div class="imgs"><img width="52%" src="@/assets/code.png" />
+    <router-link to="/AccountQrPage"> <div class="imgs"><img width="53%" src="@/assets/group5.png" />
     <h5 class="black--text">My QR</h5></div></router-link>
 </v-col>
 <v-col  cols="4" class="px-1 py-1">
-    <router-link to="/SupportPage"> <div class="imgs"><img width="53%" src="@/assets/support.png" />
+    <router-link to="/SupportPage"> <div class="imgs"><img width="53%" src="@/assets/group6.png" />
     <h5 class="black--text">Support</h5></div></router-link>
 </v-col>
 

@@ -2,7 +2,7 @@
   <v-card flat tile>
     <v-toolbar color="#101828" dark class="pa-n8">
       <router-link to="/MenuTextPage"
-        ><img class="ml-n3" width="120px" src="@/assets/logo.png"
+        ><img class="ml-n2 mt-1" width="120px" src="@/assets/logo.png"
       /></router-link>
 
       <v-spacer></v-spacer>

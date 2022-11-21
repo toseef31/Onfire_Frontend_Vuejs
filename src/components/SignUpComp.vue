@@ -4,7 +4,7 @@
       <v-row>
         <v-col cols="12" md="4" class="pa-0">
           <v-text-field
-            v-model="firstname"
+            v-model="name"
             :rules="nameRules"
             label="Name"
             required
@@ -13,7 +13,7 @@
 
         <v-col cols="12" md="4" class="pa-0">
           <v-text-field
-            v-model="lastname"
+            v-model="surname"
             :rules="nameRules"
             label="Sur Name"
             required
@@ -30,8 +30,8 @@
         </v-col>
         <v-col cols="12" md="4" class="pa-0">
           <v-text-field
-            v-model="email"
-            :rules="emailRules"
+            v-model="mobilenumber"
+            :rules="mobileRules"
             label="Mobile Number"
             required
           ></v-text-field>
@@ -52,7 +52,7 @@
             </v-col>
             <v-col cols="12" md="4" class="pa-0 ma-0">
         <v-text-field
-              v-model="password"
+              v-model="passwordConfirm"
               
               :rules="[rules.required, rules.min, rules.strength]"
               validate-on-blur
@@ -68,7 +68,7 @@
         <v-col class="pa-0 mt-16">
           
          
-          <v-btn  @click="overlay = !overlay" block color="#EF7E35" class=" py-6 text-h6" :class="`elevation-${hover ? 54 : 14}`"
+          <v-btn  @click="signup" block color="#EF7E35" class=" py-6 text-h6" :class="`elevation-${hover ? 54 : 14}`"
             >CREATE YOUR PROFILE 
         </v-btn
           >
@@ -99,35 +99,76 @@
 </template>
     
     <script>
+    import axios from "axios";
 export default {
     name:'SignUpComp',
   data: () => ({
+    showPassword:false,
+    
     absolute: true,
       opacity: 0,
       overlay: false,
     valid: false,
-    firstname: "",
-    lastname: "",
-    nameRules: [
-      (v) => !!v || "Name is required",
-      (v) => v.length <= 10 || "Name must be less than 10 characters",
-    ],
+    name: "",
+    surname: "",
+    mobilenumber:null,
+    mobileRules:[
+        (v) => !!v || "Number is required",
+        (v) => (v && v.length >= 10) || "Number must be greater than 10 characters",
+        
+      ],
+      nameRules: [
+        (v) => !!v || "Name is required",
+        (v) => (v && v.length >= 2) || "Name must be greater than 2 characters",
+        (v) => /^[a-zA-Z]+(?:-[a-zA-Z]+)*$/.test(v) || "Numbers not allowed",
+      ],
+   
     email: "",
     emailRules: [
       (v) => !!v || "E-mail is required",
       (v) => /.+@.+/.test(v) || "E-mail must be valid",
     ],
+   
+      passwordRules: [
+        (v) => !!v || "Password is Required",
+        (v) => v.length >= 6 || "Password greater then 6 digit",
+      ],
+      passwordConfirm: "",
+     
     show1: false,
       show2: true,
       show3: false,
       show4: false,
-      password: '',
+      password: "",
       rules: {
         required: value => !!value || 'Required.',
         min: v => v.length >= 8 || 'Min 8 characters',
         emailMatch: () => ('The email and password you entered don\'t match'),
       },
   }),
+  methods: {
+    async signup() {
+      console.log("i am in")
+      if (this.$refs.form.validate()) {
+        let result = await axios.post("http://138.68.27.231:3000/api/v1/users/signup", {
+          name: this.name,
+          surname: this.surname,
+          email: this.email,
+          mobilenumber:this.mobilenumber,
+          password: this.password,
+          passwordConfirm: this.passwordConfirm,
+
+        });
+        (this.name = ""),(this.surname = ""), (this.email = ""), (this.password = ""); (this.mobilenumber = "");(this.password = "");(this.passwordConfirm = "");
+        console.log("i got in")
+        if (result.status == 201) {
+          this.overlay = !this.overlay;
+          this.$router.push({ name: "MyProfilePage" });
+          localStorage.setItem("user-info", JSON.stringify(result.data));
+        }
+      }
+    },
+  },
   
 };
 </script>

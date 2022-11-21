@@ -36,7 +36,7 @@
               </p>
             </v-col>
             <v-col cols="2" class="ma-0 pa-0">
-              <v-icon color="#ffff">mdi-map-marker</v-icon>
+              <img class="mt-n2" width="100%" src="@/assets/google-maps.png" />
             </v-col>
           </v-row>
         </v-col>
