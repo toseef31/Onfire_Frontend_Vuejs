@@ -1,19 +1,19 @@
 <template>
   <v-footer class="footer">
-    <v-card-text>
+    <v-card-text class="center">
       <router-link to="/">
-      <v-btn class="mx-1">
-        <v-icon size="34px"> mdi-home </v-icon>
-      </v-btn></router-link>
-      <router-link to="/MyProfilePage"><v-btn class="mx-4">
-        <v-icon size="34px"> mdi-account </v-icon>
-      </v-btn></router-link>
-      <router-link to="/TicketPage"><v-btn class="mx-4">
-        <v-icon size="34px"> mdi-ticket-confirmation </v-icon>
-      </v-btn></router-link>
-      <router-link to="/OrdersPage">  <v-btn class="mx-4">
-        <v-icon size="34px"> mdi-clipboard-text </v-icon>
-      </v-btn></router-link>
+      
+        <img class="mt-0 mx-7" width="24px" src="@/assets/home.png" />
+      </router-link>
+      <router-link to="/MyProfilePage">
+        <img class="mt-0 mx-7" width="20px" src="@/assets/person.png" />
+      </router-link>
+      <router-link to="/TicketPage">
+        <img class="mt-0 mx-7" width="22px" src="@/assets/ticket.png" />
+     </router-link>
+      <router-link to="/OrdersPage">  
+        <img class="mt-0 mx-8" width="19px" height="auto" src="@/assets/orders.png" />
+     </router-link>
     </v-card-text>
   </v-footer>
 </template>
@@ -44,8 +44,11 @@ export default {
   left: 0;
   bottom: 0;
   width: 100%;
-
+ 
   text-align: center;
+}
+.center{
+  justify-content: center !important;
 }
 .card {
  

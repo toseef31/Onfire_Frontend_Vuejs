@@ -1,5 +1,5 @@
 <template>
-  <v-form v-model="valid">
+  <v-form ref="form">
     <v-container style="background-color: #d0d5dd;height:100vh;" class="px-9 py-10">
       <v-row>
         <v-col cols="12" md="4" class="pa-0">
@@ -38,14 +38,14 @@
         </v-col>
         <v-col cols="12" md="4" class="pa-0 ma-0">
         <v-text-field
-        
+        ref="password"
               v-model="password"
               :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
               :rules="[rules.required, rules.min, rules.strength]"
               validate-on-blur
-              :type="showPassword ? 'text' : ''"
+              type="password"
               label="Password"
-              
+              v-validate="'required'"
               @click:append="showPassword = !showPassword"
             ></v-text-field>
           
@@ -56,7 +56,7 @@
               
               :rules="[rules.required, rules.min, rules.strength]"
               validate-on-blur
-              :type="showPassword ? 'text' : ''"
+              :type="password"
               label="Confirm Password"
              
               @click:append="showPassword = !showPassword"
@@ -147,6 +147,7 @@ export default {
       },
   }),
   methods: {
+  
     async signup() {
       console.log("i am in")
       if (this.$refs.form.validate()) {
@@ -159,11 +160,12 @@ export default {
           passwordConfirm: this.passwordConfirm,
 
         });
+        
         (this.name = ""),(this.surname = ""), (this.email = ""), (this.password = ""); (this.mobilenumber = "");(this.password = "");(this.passwordConfirm = "");
-        console.log("i got in")
-        if (result.status == 201) {
+        
+        if (result.status == 200) {
           this.overlay = !this.overlay;
-          this.$router.push({ name: "MyProfilePage" });
+         
           localStorage.setItem("user-info", JSON.stringify(result.data));
         }
       }

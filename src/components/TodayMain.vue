@@ -1,5 +1,5 @@
 <template>
-    <v-container class="ma-0  pt-0 pb-14 px-0" style="background-color:#1D2939;">
+    <v-container fluid class="ma-0  pt-0 pb-14 px-0" style="background-color:#1D2939;">
       
       <v-overlay
           :absolute="absolute"

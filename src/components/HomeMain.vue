@@ -1,5 +1,5 @@
 <template>
-  <v-container class="ma-0 pt-0 pb-14 px-0">
+  <v-container fluid class="ma-0 pt-0 pb-14 px-0">
   
     <v-row class="#101828 mt-0 pa-1" style="background-color: #101828">
       <v-col class="pr-1 py-0 pb-0">

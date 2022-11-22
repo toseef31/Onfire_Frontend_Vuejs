@@ -20,7 +20,7 @@
         </v-col>
  </v-row>
  </div>
- <v-row style="background-color: #475467;height:100vh;">
+ <v-row style="background-color: #475467;">
    <v-col class="px-16 py-7">
     <router-link to="/ProductPage"> <div class="imgstyle"><img width="30%" src="@/assets/alcoholic.png" />
     <h2 class="black--text">Buy Food & Drinks</h2></div></router-link>

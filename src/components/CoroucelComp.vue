@@ -1,5 +1,5 @@
 <template>
-    <v-container class="ma-0 pt-0 pb-0 px-0">
+    <v-container fluid class="ma-0 pt-0 pb-0 px-0">
       <v-row class="ma-0 pa-0">
         <v-col class="ma-0 pa-0">
           <v-carousel :show-arrows="false" height="auto">

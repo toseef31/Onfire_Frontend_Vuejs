@@ -58,7 +58,7 @@
           <h4 class="white--text float-right">General Bar Total:</h4>
         </v-col>
         <v-col cols="3">
-            <h4 class="white--text float-right mt-10"> $21.500</h4>
+            <h4 class="white--text float-right mt-0"> $21.500</h4>
         </v-col>
     </v-row>
     
