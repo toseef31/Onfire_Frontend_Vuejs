@@ -1,7 +1,7 @@
 <template>
   <v-card flat tile>
     <v-toolbar color="#101828" dark class="pa-n8">
-      <router-link to="/MenuTextPage"
+      <router-link to="/"
         ><img class="ml-n2 mt-1" width="120px" src="@/assets/logo.png"
       /></router-link>
 

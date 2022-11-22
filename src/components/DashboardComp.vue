@@ -63,6 +63,9 @@
     text-decoration: none!important;
     text-transform: inherit;
   }
+  h5{
+    font-size:12px;
+  }
   
   
  

@@ -150,8 +150,11 @@
             required
           ></v-text-field>
             <p class="white--text float-left mt-1">Discount: $750</p>
-            <v-btn @click="overlay = !overlay" color="#EF7E35" class="px-10 py-8">PAY FOR YOUR 2 DRINKS - $50.50</v-btn>
-        </v-col>
+            <v-btn  @click="overlay = !overlay" color="#EF7E35" class="px-10 py-8">PAY FOR YOUR 2 DRINKS - $50.50</v-btn>
+
+            </v-col>
+
+           
     </v-row>
   </div>
 </template>
@@ -210,6 +213,7 @@ p{
   text-decoration: none;
   font-size: 14px!important;
   font-weight: 700;
+  width: 100%!important;
 }
 .est {
   border: 2px solid #ef7e35;
