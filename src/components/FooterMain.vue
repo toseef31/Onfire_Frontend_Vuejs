@@ -12,7 +12,7 @@
         <img class="mt-0 mx-7" width="22px" src="@/assets/ticket.png" />
      </router-link>
       <router-link to="/OrdersPage">  
-        <img class="mt-0 mx-8" width="19px" height="auto" src="@/assets/orders.png" />
+        <img class="mt-0 mx-8" width="20px" height="auto" src="@/assets/orders.png" />
      </router-link>
     </v-card-text>
   </v-footer>

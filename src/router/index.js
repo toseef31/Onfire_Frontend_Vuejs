@@ -21,6 +21,7 @@ import GeneralAdmissionPage from '../views/GeneralAdmissionPage.vue'
 import FoodPage from '../views/FoodPage.vue'
 import PizzasPage from '../views/PizzasPage.vue'
 import EventPointPage from '../views/EventPointPage.vue'
+import LoginPage from '../views/LoginPage.vue'
 
 
 Vue.use(VueRouter)
@@ -132,6 +133,11 @@ const routes = [
     path: '/EventPointPage',
     name: 'EventPointPage',
     component: EventPointPage
+  },
+  {
+    path: '/LoginPage',
+    name: 'LoginPage',
+    component: LoginPage
   },
   
   

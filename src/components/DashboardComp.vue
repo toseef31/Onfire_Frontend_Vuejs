@@ -3,7 +3,7 @@
       
       <v-row class="px-7 pt-10 pb-3" style="background-color: #475467;">
    <v-col  cols="4" class="px-1 py-1">
-    <router-link to="/SignUpPage"> <div class="imgs" :class="`elevation-${hover ? 54 : 6}`"><img width="61%" src="@/assets/group1.png" />
+    <router-link to="/LoginPage"> <div class="imgs" :class="`elevation-${hover ? 54 : 6}`"><img width="61%" src="@/assets/group1.png" />
     <h5 class="black--text">My Profile</h5></div></router-link>
 </v-col>
 <v-col  cols="4" class="px-1 py-1">
