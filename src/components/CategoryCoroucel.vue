@@ -8,7 +8,7 @@
         >
         <div class="px-3 py-5 mx-5" style="background-color:#344054;border-radius:6px;">
         <p class="white-text my-6 text-center ">Create or login to the OnFire account to continue with your order</p>
-        <div style="background-color:white;border-radius: 4px;" class="px-4 py-3" ><v-icon color="black">mdi-email-outline</v-icon><span class="ml-2 black--text">Continue with your email</span></div>
+        <router-link to="/LoginPage"> <div style="background-color:white;border-radius: 4px;" class="px-4 py-3" ><v-icon color="black">mdi-email-outline</v-icon><span class="ml-2 black--text">Continue with your email</span></div></router-link>
         <p class="white-text my-6 text-center ">Continue with</p>
         <div class="">
           <router-link to="/"
