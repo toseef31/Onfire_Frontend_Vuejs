@@ -95,6 +95,12 @@
   
       }
      },
+     mounted() {
+    let user = localStorage.getItem("user-info");
+    if (user) {
+     this.overlay=false;
+    }
+  },
     
   };
   </script>

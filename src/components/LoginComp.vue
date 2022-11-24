@@ -19,7 +19,6 @@
 
         <v-col cols="12" md="4" class="pa-0 ma-0">
           <v-text-field
-         
             label="Password"
             :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
             @click:append="showPassword = !showPassword"
@@ -77,6 +76,12 @@ export default {
 
     passwordRules: [(v) => !!v || "Password is required"],
   }),
+  mounted() {
+    let user = localStorage.getItem("user-info");
+    if (user) {
+      this.$router.push({ name: "MyProfilePage" });
+    }
+  },
   methods: {
     async signup() {
       console.log("i am in", this.$refs.form.validate());
@@ -102,18 +107,18 @@ export default {
           }
           if (result.status == 200) {
             console.log("success");
-            localStorage.setItem("user-info", JSON.stringify(result.data[0]));
+            console.log(result.data.data.user);
+            localStorage.setItem("user-info", JSON.stringify(result.data.data.user));
             this.$router.push({ name: "MyProfilePage" });
           }
         } catch (err) {
           //  console.log("catched: ", err.message);
-          this.error = err;
+          this.error = err.response;
           this.error = err.response.data.message;
           console.log(err.response.data.message);
         }
       }
     },
-   
   },
 };
 </script>
