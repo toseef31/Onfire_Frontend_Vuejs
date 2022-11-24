@@ -1,5 +1,5 @@
 <template>
-  <v-form ref="form" v-model="valid" lazy-validation>
+  <v-form ref="form">
     <v-container
       style="background-color: #d0d5dd; height: 100vh"
       class="px-9 py-10"
@@ -44,10 +44,10 @@
         </v-col>
 
         <v-col cols="12" md="4" class="pa-0 ma-0">
-           <v-text-field
+          <v-text-field
             label="Password"
             :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-    @click:append="showPassword = !showPassword"
+            @click:append="showPassword = !showPassword"
             v-model="password"
             :rules="passwordRules"
             :type="[showPassword ? 'text' : 'password']"
@@ -85,20 +85,22 @@
                 class="px-4 py-3"
               >
                 <v-icon color="black">mdi-email-outline</v-icon
-                ><span class="ml-2 black--text">{{this.email}}</span>
+                ><span class="ml-2 black--text">{{ this.email }}</span>
               </div>
               <p class="white-text my-7">
                 Please Check your Email to activate On-Fire
               </p>
-              <v-btn
-                :class="`elevation-${hover ? 54 : 14}`"
-                block
-                color="#EF7E35"
-                class="py-6 text-h6 black--text"
-                @click="overlay = false"
+              <router-link to="/MyProfilePage"
+                ><v-btn
+                  :class="`elevation-${hover ? 54 : 14}`"
+                  block
+                  color="#EF7E35"
+                  class="py-6 text-h6 black--text"
+                  @click="overlay = false"
+                >
+                  CONTINUE
+                </v-btn></router-link
               >
-                CONTINUE
-              </v-btn>
             </div>
           </v-overlay>
           <p class="text-left #475467-text mt-3" style="font-size: 12px">
@@ -112,13 +114,13 @@
 </template>
     
     <script>
-    
 import axios from "axios";
 export default {
   name: "SignUpComp",
-  
+
   data: () => ({
     showPassword: false,
+    hover: "",
     error: "",
     absolute: true,
     opacity: 0,
@@ -128,15 +130,12 @@ export default {
     surname: "",
     mobilenumber: null,
     mobileRules: [
-      
-      
       (v) =>
         (v && v.length >= 10) || "Number must be greater than 10 characters",
     ],
     nameRules: [
       (v) => !!v || "Name is required",
       (v) => (v && v.length >= 2) || "Name must be greater than 2 characters",
-      
     ],
 
     email: "",
@@ -144,12 +143,28 @@ export default {
       (v) => !!v || "E-mail is required",
       (v) => /.+@.+/.test(v) || "E-mail must be valid",
     ],
-
     password: "",
+    passwordRules: [
+      (v) => !!v || "Password is required",
+      (v) => (v && v.length >= 8) || "Name must be greater than 2 characters",
+    ],
+
     passwordConfirm: "",
-    passwordRules: [(v) => !!v || "Password is required"],
-    confirmPasswordRules: [(v) => !!v || "Password is required"],
+
+    confirmPasswordRules: [(v) => !!v || "Confirm Password is required"],
   }),
+  mounted() {
+    let user = localStorage.getItem("user-info");
+    if (user) {
+      this.$router.push({ name: "MyProfilePage" });
+    }
+  },
+  computed: {
+    passwordConfirmationRule() {
+      return () =>
+        this.password === this.passwordConfirm || "Password must match";
+    },
+  },
   methods: {
     async signup() {
       console.log("i am in", this.$refs.form.validate());
@@ -173,34 +188,24 @@ export default {
           );
 
           console.log("result: ", result);
-         
+
           if (result.status == 500) {
             this.error = this.response;
 
             console.log("11111: ", this.error);
           }
           if (result.status == 200) {
-            this.error="",
-            
-            
-            this.overlay = !this.overlay;
-            
+            (this.error = ""), (this.overlay = !this.overlay);
+
             localStorage.setItem("user-info", JSON.stringify(result.data));
           }
         } catch (err) {
           //  console.log("catched: ", err.message);
           this.error = err.response.data.message;
-          
+
           console.log(err.response.data.message);
         }
       }
-    },
-    computed: {
-      
-      passwordConfirmationRule() {
-        return () =>
-          this.password === this.passwordConfirm || "Password must match";
-      },
     },
   },
 };

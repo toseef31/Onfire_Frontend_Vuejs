@@ -110,6 +110,12 @@
   <script>
 export default {
   name: 'AccountPurchase',
+  mounted() {
+    let user = localStorage.getItem("user-info");
+    if (!user) {
+      this.$router.push({ name: "LoginPage" });
+    }
+  },
 };
 </script>
   

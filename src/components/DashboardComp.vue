@@ -18,16 +18,16 @@
  </v-row>
  <v-row class="px-7 pb-10 pt-3" style="background-color: #475467;">
    <v-col  cols="4" class="px-1 py-1">
-    <router-link to="/IdPage"> <div class="imgs" :elevation="hover ? 24 : 6"><img width="71%" src="@/assets/group4.png" />
-    <h5 class="black--text">ID Verification</h5></div></router-link>
+     <div class="imgs" :elevation="hover ? 24 : 6"><img width="71%" src="@/assets/group4.png" />
+    <h5 class="black--text">ID Verification</h5></div>
 </v-col>
 <v-col  cols="4" class="px-1 py-1">
     <router-link to="/AccountQrPage"> <div class="imgs"><img width="53%" src="@/assets/group5.png" />
     <h5 class="black--text">My QR</h5></div></router-link>
 </v-col>
 <v-col  cols="4" class="px-1 py-1">
-    <router-link to="/SupportPage"> <div class="imgs"><img width="53%" src="@/assets/group6.png" />
-    <h5 class="black--text">Support</h5></div></router-link>
+    <div class="imgs"><img width="53%" src="@/assets/group6.png" />
+    <h5 class="black--text">Support</h5></div>
 </v-col>
 
  </v-row>
@@ -41,7 +41,12 @@
      
        
     }),
-    
+    mounted() {
+    let user = localStorage.getItem("user-info");
+    if (!user) {
+      this.$router.push({ name: "LoginPage" });
+    }
+  },
   };
   </script>
       

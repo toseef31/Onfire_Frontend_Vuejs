@@ -2,17 +2,17 @@
     <v-form v-model="valid">
       <v-container style="background-color: #d0d5dd" class="px-9 py-10">
         <v-row class="px-4 py-2 pb-4">
-            <v-col cols="6"  class="pa-0"><h4 class="text-left black-color">Aliosha Beritin</h4></v-col>
+            <v-col cols="6"  class="pa-0"><h4 class="text-left black-color">{{this.name}}</h4></v-col>
            <v-col cols="6" class="pa-0"> <h4 class="text-right black-color">Balance: $48.50</h4></v-col>
           </v-row>
           <hr/>
           <v-row class="px-4 py-2 pb-4">
-            <v-col cols="12"  class="pa-0 mt-6"><p class="text-left black-color pa-0 ma-0">Aliosha@onfire.com<span style="color:red;float: right;">UNVERIFIED</span></p></v-col>
+            <v-col cols="12"  class="pa-0 mt-6"><p class="text-left black-color pa-0 ma-0">{{this.email}}<span style="color:red;float: right;">UNVERIFIED</span></p></v-col>
           
           </v-row>
           <hr/>
           <v-row class="px-4 py-2 pb-4">
-            <v-col cols="12"  class="pa-0 mt-6"><p class="text-left black-color pa-0 ma-0"><span style="color:#EF7E35;" class="mr-2">+56</span>99 878 676</p></v-col>
+            <v-col cols="12"  class="pa-0 mt-6"><p class="text-left black-color pa-0 ma-0">{{this.mobilenumber}}</p></v-col>
           
           </v-row>
           <hr/>
@@ -41,34 +41,33 @@
       
       <script>
       
-
+      
   export default {
+   
     name:'MyProfileComp',
    
     data: () => ({
       valid: false,
-      firstname: "",
-      lastname: "",
-      nameRules: [
-        (v) => !!v || "Name is required",
-        (v) => v.length <= 10 || "Name must be less than 10 characters",
-      ],
-      email: "",
-      emailRules: [
-        (v) => !!v || "E-mail is required",
-        (v) => /.+@.+/.test(v) || "E-mail must be valid",
-      ],
-      show1: false,
-        show2: true,
-        show3: false,
-        show4: false,
-        password: '',
-        rules: {
-          required: value => !!value || 'Required.',
-          min: v => v.length >= 8 || 'Min 8 characters',
-          emailMatch: () => ('The email and password you entered don\'t match'),
-        },
+      id:'',
+      userdata:'',
+      name: '',
+      email: '',
+      mobilenumber: '',
+      password: '',
+      
+      
     }),
+    async created(){
+      this.userdata=(JSON.parse(localStorage.getItem('user-info'))._id);
+      this.name=(JSON.parse(localStorage.getItem('user-info')).name);
+      this.email=(JSON.parse(localStorage.getItem('user-info')).email);
+      this.mobilenumber=(JSON.parse(localStorage.getItem('user-info')).mobilenumber);
+      this.password=(JSON.parse(localStorage.getItem('user-info')).password);
+    //const result= await axios.get("http://138.68.27.231:3000/api/v1/users/profiledata"+this.$route.params.id);
+    
+   
+
+  }
     
   };
   </script>
