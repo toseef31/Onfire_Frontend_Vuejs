@@ -22,6 +22,7 @@ import FoodPage from '../views/FoodPage.vue'
 import PizzasPage from '../views/PizzasPage.vue'
 import EventPointPage from '../views/EventPointPage.vue'
 import LoginPage from '../views/LoginPage.vue'
+import UpdatePasswordPage from '../views/UpdatePasswordPage.vue'
 
 
 Vue.use(VueRouter)
@@ -52,12 +53,18 @@ const routes = [
   {
     path: '/MenuPage',
     name: 'MenuPage',
-    component: MenuPage
+    component: MenuPage,
+    meta: {
+      title: 'Menu'
+  }
   },
   {
     path: '/CartPage',
     name: 'CartPage',
-    component: CartPage
+    component: CartPage,
+    meta: {
+      title: 'Shopping Cart'
+  }
   },
   {
     path: '/MenuTextPage',
@@ -67,77 +74,130 @@ const routes = [
   {
     path: '/TicketPage',
     name: 'TicketPage',
-    component: TicketPage
+    component: TicketPage,
+    meta: {
+      title: 'Ticket'
+  }
   },
   {
     path: '/OrdersPage',
     name: 'OrdersPage',
-    component: OrdersPage
+    component: OrdersPage,
+    meta: {
+      title: 'Orders in Progress'
+  }
   },
   {
     path: '/OrdersQrPage',
     name: 'OrdersQrPage',
-    component: OrdersQrPage
+    component: OrdersQrPage,
+    meta: {
+      title: 'General parking'
+  }
   },
   {
     path: '/MyProfilePage',
     name: 'MyProfilePage',
-    component: MyProfilePage
+    component: MyProfilePage,
+    meta: {
+      title: 'My Profile'
+  }
   },
   {
     path: '/SignUpPage',
     name: 'SignUpPage',
-    component: SignUpPage
+    component: SignUpPage,
+    meta: {
+      title: 'My Profile'
+  }
   },
   {
     path: '/AccountQrPage',
     name: 'AccountQrPage',
-    component: AccountQrPage
+    component: AccountQrPage,
+    meta: {
+      title: 'QR'
+  }
   },
   {
     path: '/MyWalletPage',
     name: 'MyWalletPage',
-    component: MyWalletPage
+    component: MyWalletPage,
+    meta: {
+      title: 'Wallet'
+  }
   },
   {
     path: '/AccountPurchasePage',
     name: 'AccountPurchasePage',
-    component: AccountPurchasePage
+    component: AccountPurchasePage,
+    meta: {
+      title: 'My Purchases'
+  }
   },
   {
     path: '/ModifyProfilePage',
     name: 'ModifyProfilePage',
-    component: ModifyProfilePage
+    component: ModifyProfilePage,
+    meta: {
+      title: 'My Profile'
+  }
   },
   {
     path: '/GeneralParkingPage',
     name: 'GeneralParkingPage',
-    component: GeneralParkingPage
+    component: GeneralParkingPage,
+    meta: {
+      title: 'General Parking'
+  }
   },
   {
     path: '/GeneralAdmissionPage',
     name: 'GeneralAdmissionPage',
-    component: GeneralAdmissionPage
+    component: GeneralAdmissionPage,
+    meta: {
+      title: 'General Admission'
+  }
   },
   {
     path: '/FoodPage',
     name: 'FoodPage',
-    component: FoodPage
+    component: FoodPage,
+    meta: {
+      title: 'Menu'
+  }
   },
   {
     path: '/PizzasPage',
     name: 'PizzasPage',
-    component: PizzasPage
+    component: PizzasPage,
+    meta: {
+      title: 'Menu'
+  }
   },
   {
     path: '/EventPointPage',
     name: 'EventPointPage',
-    component: EventPointPage
+    component: EventPointPage,
+    meta: {
+      title: 'Event Points'
+  }
   },
   {
     path: '/LoginPage',
     name: 'LoginPage',
-    component: LoginPage
+    component: LoginPage,
+    meta: {
+      title: 'Login'
+  }
+  },
+  {
+    path: '/UpdatePasswordPage',
+    name: 'UpdatePasswordPage',
+    component: UpdatePasswordPage,
+    meta: {
+      title: 'Update Password'
+  }
   },
   
   
@@ -146,5 +206,9 @@ const routes = [
 const router = new VueRouter({
   routes
 })
+router.beforeEach((toRoute, fromRoute, next) => {
+  window.document.title = toRoute.meta && toRoute.meta.title ? toRoute.meta.title : 'Home';
 
+  next();
+})
 export default router

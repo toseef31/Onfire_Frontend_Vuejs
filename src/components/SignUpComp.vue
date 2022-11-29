@@ -45,6 +45,7 @@
 
         <v-col cols="12" md="4" class="pa-0 ma-0">
           <v-text-field
+          
             label="Password"
             :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
             @click:append="showPassword = !showPassword"
@@ -119,6 +120,7 @@ export default {
   name: "SignUpComp",
 
   data: () => ({
+   
     showPassword: false,
     hover: "",
     error: "",

@@ -11,7 +11,7 @@
       >
       <v-icon @click="$router.go(-1)">mdi-arrow-left</v-icon>
   
-       <h3 class="ml-4">Hernan Caetana</h3>
+       <h3 class="ml-4">{{ $route.meta.title }}</h3>
        <v-spacer></v-spacer>
   
        <router-link to="/CartPage"><v-btn>
