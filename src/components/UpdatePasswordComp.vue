@@ -1,26 +1,28 @@
 <template>
-  <v-form ref="form" v-model="valid" lazy-validation>
+  <v-form ref="form">
     <v-container
       style="background-color: #d0d5dd; height: 100vh"
       class="px-9 py-10"
     >
-      <v-row class="mt-16 pt-16">
+      <v-row>
         <p class="red--text">{{ this.error }}</p>
-        <p class="red--text">{{ this.statuserror }}</p>
       </v-row>
-      <v-row class="mt-0 pt-0">
-        <v-col cols="12" md="4" class="pa-0">
+      <v-row>
+        <v-col cols="12" md="4" class="pa-0 ma-0">
           <v-text-field
-            v-model="email"
-            :rules="emailRules"
-            label="E-mail"
+            label="Current Password"
+            :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+            @click:append="showPassword = !showPassword"
+            v-model="passwordCurrent"
+            :rules="passwordRules"
+            :type="[showPassword ? 'text' : 'password']"
             required
           ></v-text-field>
         </v-col>
 
         <v-col cols="12" md="4" class="pa-0 ma-0">
           <v-text-field
-            label="Password"
+            label="New Password"
             :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
             @click:append="showPassword = !showPassword"
             v-model="password"
@@ -29,27 +31,26 @@
             required
           ></v-text-field>
         </v-col>
+        <v-col cols="12" md="4" class="pa-0 ma-0">
+          <v-text-field
+            label="Confirm New Password"
+            v-model="passwordConfirm"
+            :rules="confirmPasswordRules.concat(passwordConfirmationRule)"
+            type="password"
+            required
+          ></v-text-field>
+        </v-col>
       </v-row>
-      <v-row class="pt-1 bottom mt-11">
-        <v-col class="pa-0 mt-6">
+      <v-row class="pt-15 bottom mt-16">
+        <v-col class="pa-0 mt-16">
           <v-btn
-            @click="signup"
+            @click="UpdatePassword"
             block
             color="#EF7E35"
             class="py-6 text-h6"
             :class="`elevation-${hover ? 54 : 14}`"
-            >LOGIN
+            >Update Password
           </v-btn>
-          <h4 class="mt-6">OR</h4>
-        </v-col>
-      </v-row>
-      <v-row class="pt-0 bottom mt-0">
-        <v-col class="pa-0 mt-6">
-          <router-link to="/SignUpPage"
-            ><p class="py-0 text-h6 black--text text-decoration-underline">
-              CREATE YOUR PROFILE
-            </p></router-link
-          >
         </v-col>
       </v-row>
     </v-container>
@@ -58,46 +59,57 @@
       
       <script>
 import axios from "axios";
-import setAuthHeader from "../utils/setAuthHeader";
 export default {
-  name: "LoginComp",
+  name: "UpdatePasswordComp",
 
   data: () => ({
     showPassword: false,
+    hover: "",
     error: "",
-    statuserror: "",
 
     valid: false,
 
-    email: "",
-    emailRules: [
-      (v) => !!v || "E-mail is required",
-      (v) => /.+@.+/.test(v) || "E-mail must be valid",
-    ],
+    passwordCurrent: "",
 
     password: "",
+    passwordRules: [
+      (v) => !!v || "Password is required",
+      (v) => (v && v.length >= 8) || "Name must be greater than 2 characters",
+    ],
 
-    passwordRules: [(v) => !!v || "Password is required"],
+    passwordConfirm: "",
+
+    confirmPasswordRules: [(v) => !!v || "Confirm Password is required"],
   }),
   mounted() {
     let user = localStorage.getItem("user-info");
-    if (user) {
+    if (!user) {
       this.$router.push({ name: "MyProfilePage" });
     }
   },
+  computed: {
+    passwordConfirmationRule() {
+      return () =>
+        this.password === this.passwordConfirm || "Password must match";
+    },
+  },
   methods: {
-    async signup() {
+    async UpdatePassword() {
       console.log("i am in", this.$refs.form.validate());
       if (this.$refs.form.validate()) {
         console.log("inside");
 
-        try {
-          let result = await axios.post(
-            "http://138.68.27.231:3000/api/v1/users/login",
-            {
-              email: this.email,
+        console.log("password", this.currentpassword);
 
+        console.log("password", this.password);
+        console.log("confirm", this.passwordConfirm);
+        try {
+          let result = await axios.patch(
+            "http://138.68.27.231:3000/api/v1/users/updateMyPassword",
+            {
+              passwordCurrent: this.passwordCurrent,
               password: this.password,
+              passwordConfirm: this.passwordConfirm,
             }
           );
 
@@ -109,19 +121,14 @@ export default {
             console.log("11111: ", this.error);
           }
           if (result.status == 200) {
-            console.log("success");
-            console.log(result.data.data.user);
-            localStorage.setItem("user-info", JSON.stringify(result.data.data.user));
-            setAuthHeader(result.data.token);
-            this.$router.push({ name: "MyProfilePage" });
+            (this.error = ""), (this.overlay = !this.overlay);
+alert("done updated")
           }
-        }
-       catch (err) {
-          //console.log("catched: ", err.message);
-          
+        } catch (err) {
+          //  console.log("catched: ", err.message);
           this.error = err.response.data.message;
+
           console.log(err.response.data.message);
-          this.statuserror= err.message;
         }
       }
     },

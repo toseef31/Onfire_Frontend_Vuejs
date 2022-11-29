@@ -1,10 +1,16 @@
 <template>
-  <v-form v-model="valid">
-    <v-container style="background-color: #d0d5dd;height:100vh;" class="px-9 py-10">
+  <v-form ref="form">
+    <v-container
+      style="background-color: #d0d5dd; height: 100vh"
+      class="px-9 py-10"
+    >
+      <v-row>
+        <p class="red--text">{{ this.error }}</p>
+      </v-row>
       <v-row>
         <v-col cols="12" md="4" class="pa-0">
           <v-text-field
-            v-model="firstname"
+            v-model="userdetail.name"
             :rules="nameRules"
             label="Name"
             required
@@ -13,7 +19,7 @@
 
         <v-col cols="12" md="4" class="pa-0">
           <v-text-field
-            v-model="lastname"
+            v-model="userdetail.surname"
             :rules="nameRules"
             label="Sur Name"
             required
@@ -22,7 +28,7 @@
 
         <v-col cols="12" md="4" class="pa-0">
           <v-text-field
-            v-model="email"
+            v-model="userdetail.email"
             :rules="emailRules"
             label="E-mail"
             required
@@ -30,48 +36,36 @@
         </v-col>
         <v-col cols="12" md="4" class="pa-0">
           <v-text-field
-            v-model="email"
-            :rules="emailRules"
+            v-model="userdetail.mobilenumber"
+            :rules="mobileRules"
             label="Mobile Number"
             required
           ></v-text-field>
         </v-col>
-        <v-col cols="12" md="4" class="pa-0 ma-0">
-        <v-text-field
-        
-              v-model="password"
-              :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-              :rules="[rules.required, rules.min, rules.strength]"
-              validate-on-blur
-              :type="showPassword ? 'text' : ''"
-              label="Password"
-              
-              @click:append="showPassword = !showPassword"
-            ></v-text-field>
-          
-            </v-col>
-            <v-col cols="12" md="4" class="pa-0 ma-0">
-        <v-text-field
-              v-model="password"
-              
-              :rules="[rules.required, rules.min, rules.strength]"
-              validate-on-blur
-              :type="showPassword ? 'text' : ''"
-              label="Confirm Password"
-             
-              @click:append="showPassword = !showPassword"
-            ></v-text-field>
-          
-            </v-col>
-      </v-row>
-      <v-row  class="pt-15 bottom mt-16">
-        <v-col class="pa-0 mt-16">
-          
-         
-          <v-btn block color="#EF7E35" class=" py-6 text-h6"
-            >UPDATE YOUR PROFILE</v-btn
+       
+        <v-col cols="12" class="pa-0 mt-6 text-left"
           >
-          <p class="text-left #475467-text mt-3" style="font-size:12px;">By creating an account, you agree to the Terms of Service and Privacy Policy</p>
+          <router-link to="/UpdatePasswordPage"
+        ><v-icon>mdi-key mdi-rotate-315 </v-icon
+          ><span class="text-left black--text pa-0 mx-0 ml-2">**********</span
+          ><v-icon style="float: right">mdi-eye-off</v-icon>
+          <hr/></router-link></v-col
+        > 
+         <h4 class="mt-1 black--text">Change your password</h4>
+     
+      </v-row>
+      <v-row class="pt-15 bottom mt-16">
+        <v-col class="pa-0 mt-16">
+          <v-btn
+            @click="update"
+            block
+            color="#EF7E35"
+            class="py-6 text-h6"
+            :class="`elevation-${hover ? 54 : 14}`"
+            >UPDATE YOUR PROFILE
+          </v-btn>
+         
+         
         </v-col>
       </v-row>
     </v-container>
@@ -79,33 +73,89 @@
 </template>
     
     <script>
+import axios from "axios";
 export default {
-    name:'ModifyProfile',
+  name: "ModifyProfile",
+
   data: () => ({
+    userdetail: {
+        name: "",
+        surname: "",
+        email: "",
+        mobilenumber: "",
+        accountoldpassword: "",
+        password: "",
+        
+        id: "",
+      },
+    showPassword: false,
+    hover: "",
+    error: "",
+   
     valid: false,
-    firstname: "",
-    lastname: "",
+    name: "",
+    surname: "",
+    mobilenumber: null,
+    mobileRules: [
+      (v) =>
+        (v && v.length >= 10) || "Number must be greater than 10 characters",
+    ],
     nameRules: [
       (v) => !!v || "Name is required",
-      (v) => v.length <= 10 || "Name must be less than 10 characters",
+      (v) => (v && v.length >= 2) || "Name must be greater than 2 characters",
     ],
+
     email: "",
     emailRules: [
       (v) => !!v || "E-mail is required",
       (v) => /.+@.+/.test(v) || "E-mail must be valid",
     ],
-    show1: false,
-      show2: true,
-      show3: false,
-      show4: false,
-      password: '',
-      rules: {
-        required: value => !!value || 'Required.',
-        min: v => v.length >= 8 || 'Min 8 characters',
-        emailMatch: () => ('The email and password you entered don\'t match'),
-      },
-  }),
+    
   
+  }),
+  mounted() {
+    let user = localStorage.getItem("user-info");
+    if (!user) {
+      this.$router.push({ name: "MyProfilePage" });
+    }
+  },
+  
+  created() {
+    this.id = JSON.parse(localStorage.getItem("user-info")).id;
+    this.userdetail.name = JSON.parse(localStorage.getItem("user-info")).name;
+    this.userdetail.surname = JSON.parse(localStorage.getItem("user-info")).surname;
+    this.userdetail.email = JSON.parse(localStorage.getItem("user-info")).email;
+    this.userdetail.mobilenumber = JSON.parse(localStorage.getItem("user-info")).mobilenumber;
+    this.userdetail.title = JSON.parse(localStorage.getItem("user-info")).title;
+
+    
+  },
+  methods: {
+    async update(){
+     
+     
+     if (this.$refs.form.validate()) {
+     let result = await axios.patch(
+            "http://138.68.27.231:3000/api/v1/users/updateme",
+            {
+      
+       name: this.userdetail.name,
+       surname: this.userdetail.surname,
+       email: this.userdetail.email,
+       mobilenumber: this.userdetail.mobilenumber,
+       
+     });
+     if (result.status == 200) {
+       
+       console.log(result);
+       localStorage.setItem("user-info", JSON.stringify(result.data.data.user));
+       this.$router.push({ name: "MyProfilePage" });
+     } else {
+       alert("not");
+     }
+    }
+   },
+  },
 };
 </script>
     
@@ -119,7 +169,9 @@ export default {
   background-color: #1d2939;
 }
 
-
+.red {
+  color: red;
+}
 
 .v-btn {
   text-decoration: none;
