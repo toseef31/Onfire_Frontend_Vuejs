@@ -3,8 +3,12 @@ import App from './App.vue'
 import vuetify from './plugins/vuetify'
 import router from './router'
 import axios from "axios";
+import VueGeolocation from 'vue-browser-geolocation';
 
+
+Vue.use(VueGeolocation);
 Vue.config.productionTip = false
+
 console.log(process.env.VUE_BASE_URL);
 axios.defaults.baseURL = process.env.VUE_BASE_URL;
 new Vue({
