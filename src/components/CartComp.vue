@@ -146,7 +146,9 @@
             :rules="couponRule"
            class="white--text input"
             label="Add Your Deisocunt Code here!"
-            style="color:white;"
+           color="white"
+           dark
+         
             required
           ></v-text-field>
             <p class="white--text float-left mt-1">Discount: $750</p>
@@ -208,6 +210,9 @@ p{
 }
 .input, .label{
   color: white !important;
+}
+.input{
+  color:white;
 }
 .v-btn {
   text-decoration: none;

@@ -1,6 +1,5 @@
 <template>
   <v-container fluid class="ma-0 pt-0 pb-14 px-0">
-  
     <v-row class="#101828 mt-0 pa-1" style="background-color: #101828">
       <v-col class="pr-1 py-0 pb-0">
         <router-link to="/TodayHome">
@@ -8,6 +7,7 @@
         >
       </v-col>
     </v-row>
+    
     <v-row class="px-3 py-0" style="background-color: #1d2939">
       <v-col cols="6">
         <div class="colum">
@@ -84,13 +84,26 @@
 </template>
 
 <script>
+
 export default {
+  
   name: "HomeMain",
   data() {
     return {
-     
+      coordinates: {
+        lng: 0,
+        lat: 0,
+      },
     };
   },
+  created(){
+    this.$getLocation({})
+  .then(coordinates => {
+    console.log(coordinates);
+  })
+  .catch(error => alert(error));
+  },
+ 
 };
 </script>
 

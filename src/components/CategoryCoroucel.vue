@@ -147,6 +147,7 @@ export default {
     }
   },
   methods: {
+    
     onSuccess(googleUser) {
       console.log("google success");
       console.log(JSON.stringify(googleUser));
@@ -155,8 +156,8 @@ export default {
       console.log(googleUser.getBasicProfile());
     },
     onFailure(googleUser) {
-      console.log("google failed");
-      console.log(JSON.stringify(googleUser));
+      alert("google failed");
+      
 
       // This only gets the user information: id, name, imageUrl and email
       console.log(googleUser.getBasicProfile());
