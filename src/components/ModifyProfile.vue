@@ -118,6 +118,7 @@ export default {
     if (!user) {
       this.$router.push({ name: "MyProfilePage" });
     }
+    
   },
   
   created() {
@@ -131,6 +132,7 @@ export default {
     
   },
   methods: {
+    
     async update(){
      
      

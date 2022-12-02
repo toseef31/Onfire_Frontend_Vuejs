@@ -30,7 +30,7 @@
               <p class="white--text float-left ma-0">$12.00</p>
             </v-row>
             <v-row class="d-flex justify-end">
-              <v-btn color="#EF7E35" class="float-right mt-6">Add</v-btn>
+              <v-btn @click="addtocart" color="#EF7E35" class="float-right mt-6">Add</v-btn>
             </v-row>
             </div></router-link
           >
@@ -242,6 +242,9 @@ export default {
         if(this.counter!=0){
                   this.counter -=1;
         }
+      },
+      addtocart(){
+        
       }
     }
 };

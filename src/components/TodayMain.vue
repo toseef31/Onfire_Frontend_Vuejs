@@ -11,10 +11,11 @@
         </v-col>
       </v-row>
      <v-row  class="px-3 pt-0 pb-3" style="background-color:#1D2939">
-        <v-col cols="6">
+        <v-col cols="6" v-for="item in events"
+            :key="item.id">
             <router-link to="/VenuPage">  <div class="colum">
             <div ><img width="100%" src="@/assets/banner011.png" /></div>
-            <h5 class="heading">Le Feria</h5>
+            <h5 class="heading">{{events.eventname}}</h5>
         </div></router-link>
         </v-col>
         <v-col cols="6" >
@@ -80,26 +81,27 @@
     </template>
     
     <script>
+    import axios from "axios";
     export default {
     name:'TodayMain',
     data(){
         return{
-            items: ['france', 'china', 'pakistan', 'india'],
-            absolute: true,
-      opacity: 0,
-      overlay: true,
-      location:false,
+events:[],
+            
         }
     },
+    mounted() {
+    
+    this.pageload();
+  },
     methods: {
-        change(){
-      this.overlay = false;
-    this.location = true;
-        },
-        close(){
-            this.overlay = false;
-    this.location = false;
-        }
+        async pageload() {
+      let result = await axios.get(
+        "http://138.68.27.231:3000/api/v1/events/getallbycity"
+      );
+      console.log(result);
+      this.events = result.data;
+    },
     }
     }
     </script>
