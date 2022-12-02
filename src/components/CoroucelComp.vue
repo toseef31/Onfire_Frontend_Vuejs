@@ -1,8 +1,8 @@
 <template>
     <v-container fluid class="ma-0 pt-0 pb-0 px-0">
       <v-row class="ma-0 pa-0">
-        <v-col class="ma-0 pa-0">
-          <v-carousel :show-arrows="false" height="auto">
+        <img width="100%" :src="src" />
+        <v-col class="ma-0 pa-0"><v-carousel :show-arrows="false" height="auto">
             <v-carousel-item
               v-for="(item, i) in items"
               :key="i"
@@ -15,21 +15,26 @@
 </template>
 
 <script>
+
 export default {
   name: "CoroucelComp",
   data() {
     return {
-      items: [
-        {
-            src: 'banner.png',
-        },
-        {
-            src: 'banner.png',
-        },
-        
-    ],
+      
+            src: '',
+       items:[{
+        src:"banner.png"
+       },
+       {
+        src:"banner2.png"
+       },
+       {
+        src:"banner3.png"
+       }
+       ]
     };
   },
+  
 };
 </script>
 

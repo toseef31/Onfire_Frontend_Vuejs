@@ -51,7 +51,7 @@ const routes = [
     component: ProductPage
   },
   {
-    path: '/MenuPage',
+    path: '/MenuPage/:name',
     name: 'MenuPage',
     component: MenuPage,
     meta: {

@@ -20,10 +20,14 @@
         </v-col>
  </v-row>
  </div>
- <v-row style="background-color: #475467;">
-   <v-col class="px-16 py-7">
+ <v-row style="background-color: #475467;" class="px-4">
+   <v-col cols="6" class="px-1 py-7">
+    <router-link to="/TicketPage"> <div class="imgstyle"><img width="30%" src="@/assets/ticket-main.png" />
+    <h2 class="black--text" style="font-size: 16px;">Buy Tickets</h2></div></router-link>
+</v-col>
+<v-col cols="6" class="px-1 py-7">
     <router-link to="/ProductPage"> <div class="imgstyle"><img width="30%" src="@/assets/alcoholic.png" />
-    <h2 class="black--text">Buy Food & Drinks</h2></div></router-link>
+    <h2 class="black--text" style="font-size: 16px;">Buy Food & Drinks</h2></div></router-link>
 </v-col>
  </v-row>
 </div>

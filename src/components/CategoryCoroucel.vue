@@ -27,7 +27,6 @@
           <v-row>
             <v-col cols="6">
               <div>
-                
                 <GoogleLogin
                   :params="params"
                   :onSuccess="onSuccess"
@@ -61,54 +60,21 @@
     </v-overlay>
     <v-row style="background-color: #475467">
       <v-col class="px-6 py-7 xaxis">
-        <router-link to="/FoodPage">
-          <v-btn
+        
+          <template v-for="cat in category">
+           
+            <v-btn
+            v-for="item in cat.subcategories"
+            :key="item.id"
             :class="`elevation-${hover ? 54 : 14}`"
             class="ma-1 slidebut"
             color="#E4E7EC"
-            style="width: 96px; font-size: 12px; height: 52px"
-            >All</v-btn
+            style="width: 96px; font-size: 12px; height: 52px;"
+            >{{ item.name }}</v-btn
           >
-        </router-link>
-        <router-link to="/PizzasPage">
-          <v-btn
-            :class="`elevation-${hover ? 54 : 14}`"
-            class="ma-1 slidebut"
-            color="#E4E7EC"
-            style="width: 96px; font-size: 12px; height: 52px"
-            >Pizzas</v-btn
-          >
-        </router-link>
-        <router-link to="/MenuPage">
-          <v-btn
-            :class="`elevation-${hover ? 54 : 14}`"
-            class="ma-1 slidebut"
-            color="#E4E7EC"
-            style="width: 96px; font-size: 12px; height: 52px"
-            >Liquer</v-btn
-          >
-        </router-link>
-        <v-btn
-          :class="`elevation-${hover ? 54 : 14}`"
-          class="ma-1 slidebut"
-          color="#E4E7EC"
-          style="width: 96px; font-size: 12px; height: 52px"
-          >Bear</v-btn
-        >
-        <v-btn
-          :class="`elevation-${hover ? 54 : 14}`"
-          class="ma-1 slidebut"
-          color="#E4E7EC"
-          style="width: 96px; font-size: 12px; height: 52px"
-          >Liquer</v-btn
-        >
-        <v-btn
-          :class="`elevation-${hover ? 54 : 14}`"
-          class="ma-1 slidebut"
-          color="#E4E7EC"
-          style="width: 96px; font-size: 12px; height: 52px"
-          >Bear</v-btn
-        >
+       
+          </template>
+       
       </v-col>
     </v-row>
   </div>
@@ -117,6 +83,8 @@
   <script>
 import facebookLogin from "facebook-login-vuejs";
 import GoogleLogin from "vue-google-login";
+import axios from "axios";
+import setAuthHeader from "../utils/setAuthHeader";
 export default {
   name: "CategoryCoroucel",
   components: {
@@ -125,6 +93,8 @@ export default {
   },
   data() {
     return {
+     category: [],
+      id: "",
       name: "",
       email: "",
       overlay: true,
@@ -145,9 +115,17 @@ export default {
     if (user) {
       this.overlay = false;
     }
+    this.pageload();
   },
+
   methods: {
-    
+    async pageload() {
+      let result = await axios.get(
+        "http://138.68.27.231:3000/api/v1/category/getcategories/"+this.$route.params.name
+      );
+      console.log(result);
+      this.category = result.data;
+    },
     onSuccess(googleUser) {
       console.log("google success");
       console.log(JSON.stringify(googleUser));
@@ -157,7 +135,6 @@ export default {
     },
     onFailure(googleUser) {
       alert("google failed");
-      
 
       // This only gets the user information: id, name, imageUrl and email
       console.log(googleUser.getBasicProfile());
@@ -167,13 +144,45 @@ export default {
         "/me",
         "GET",
         { fields: "id,name,email" },
-        (userInformation) => {
+        async (userInformation) => {
           console.warn("get data from fb", userInformation);
           this.personalID = userInformation.id;
           this.email = userInformation.email;
           this.name = userInformation.name;
+
+          try {
+            let result = await axios.post(
+              "http://138.68.27.231:3000/api/v1/users/signup",
+              {
+                email: this.email,
+
+                name: this.name,
+                type: "1",
+              }
+            );
+
+            console.log("result: ", result);
+
+            if (result.status == 500) {
+              this.error = this.response;
+
+              console.log("11111: ", this.error);
+            }
+            if (result.status == 200) {
+              console.log("success");
+              console.log(result.data.data.user);
+
+              setAuthHeader(result.data.token);
+              this.$router.push({ name: "MyProfilePage" });
+            }
+          } catch (err) {
+            //console.log("catched: ", err.message);
+
+            this.error = err.response.data.message;
+            console.log(err.response.data.message);
+            this.statuserror = err.message;
+          }
           localStorage.setItem("user-info", JSON.stringify(userInformation));
-          this.$router.push({ name: "MyProfilePage" });
         }
       );
     },
