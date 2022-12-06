@@ -41,7 +41,7 @@ const routes = [
   },
   
   {
-    path: '/VenuPage',
+    path: '/VenuPage/:id',
     name: 'VenuPage',
     component: VenuPage
   },

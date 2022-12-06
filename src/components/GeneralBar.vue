@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="pa-4" style="background-color: #1d2939">
-      <v-row class="pb-8">
-        <v-col class="pb-16">
+      <v-row class="pb-0">
+        <v-col class="pb-1">
           <div class="pb-16 mt-1">
             <img width="100%" src="@/assets/banner189.png" />
           </div>
@@ -50,7 +50,7 @@
         >
       </v-col>
     </v-row>
-    <v-row class="px-7 py-4" style="background-color: #475467">
+    <v-row class="px-7 py-4 pb-16" style="background-color: #475467">
       <v-col cols="4" class="px-1 py-1">
         <router-link :to="'/MenuPage/'+name">
           <div @click="name='servicepoint'" class="imgstyle">

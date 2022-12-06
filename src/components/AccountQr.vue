@@ -18,7 +18,7 @@
         >
       </v-row>
       <hr />
-      <v-row class="mt-10 pb-4 mb-16">
+      <v-row class="mt-10 pb-4 mb-0">
         <v-col cols="12" md="4" class="pa-0">
           <p v-html="this.path"></p>
         </v-col>
