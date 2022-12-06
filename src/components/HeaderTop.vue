@@ -1,105 +1,6 @@
 <template color="#101828">
   <v-card flat tile>
-    <v-overlay
-      :absolute="absolute"
-      :opacity="opacity"
-      :value="overlay"
-      style="margin-top: 89%"
-    >
-      <div
-        class="px-1 py-5 mx-5"
-        style="background-color: #344054; border-radius: 6px"
-      >
-        <p class="white-text my-6 text-center">We do not know where you are!</p>
-        <p class="white-text my-7 text-center px-1">
-          We need to share your location or select a city to view available
-          events & venues
-        </p>
-
-        <v-btn
-          block
-          :class="`elevation-${hover ? 54 : 14}`"
-          style="font-size: 14px !important"
-          color="#EF7E35"
-          class="py-6 text-h4 black--text"
-        >
-          ACTIVATE LOCATION SHARING
-        </v-btn>
-        <p
-          style="font-size: 14px !important"
-          block
-          color="rgb(239 126 53 / 0%)"
-          class="
-            text-decoration-underline
-            py-1
-            text-h4
-            white--text
-            mt-3
-            text-center
-          "
-          @click="change"
-        >
-          Select your location
-        </p>
-        <p
-          style="font-size: 14px !important"
-          block
-          color="rgb(239 126 53 / 0%)"
-          class="py-2 text-h4 white--text mb-0 text-center"
-          @click="close"
-        >
-          Cancel
-        </p>
-      </div>
-    </v-overlay>
-    <v-overlay
-      :absolute="absolute"
-      :opacity="opacity"
-      :value="location"
-      style="margin-top: 99%"
-    >
-      <div
-        class="px-1 py-5 mx-5"
-        style="background-color: #344054; border-radius: 6px"
-      >
-        <p class="white-text my-6 text-center">Country & City!</p>
-        <p class="white-text my-7 text-center px-1">
-          In which country and city do you want to see what's happening
-        </p>
-
-        <v-btn
-          block
-          :class="`elevation-${hover ? 54 : 14}`"
-          style="font-size: 14px !important"
-          color="#EF7E35"
-          class="py-8 text-h6 black--text text--right"
-        >
-          <v-icon class="mr-2">mdi-map-marker-circle</v-icon> My Location
-        </v-btn>
-        <h4 class="my-4">OR</h4>
-        <v-select
-          :items="items"
-          filled
-          class="mx-2 black--text text--right"
-          label="Country"
-        ></v-select>
-        <v-select
-          :items="items"
-          filled
-          class="mx-2 black--text text--right"
-          label="City"
-        ></v-select>
-        <p
-          style="font-size: 14px !important"
-          block
-          color="rgb(239 126 53 / 0%)"
-          class="py-2 text-h4 white--text mb-0 text-center"
-          @click="close"
-        >
-          Cancel
-        </p>
-      </div>
-    </v-overlay>
+   
 
     <v-toolbar color="#101828" dark class="pa-n8">
       <v-row class="pr-0 pl-3" v-show="magnify">
@@ -147,23 +48,12 @@ export default {
   data() {
     return {
       magnify: true,
-
-      items: ["france", "china", "pakistan", "india"],
-      absolute: true,
-      opacity: 0,
-      overlay: true,
-      location: false,
+      
     };
   },
   methods: {
-    change() {
-      this.overlay = false;
-      this.location = true;
-    },
-    close() {
-      this.overlay = false;
-      this.location = false;
-    },
+    
+    
   },
 };
 </script>
@@ -181,5 +71,17 @@ export default {
 }
 .custom-label-color .v-label {
   color: red;
+}
+.v-application .primary--text {
+    color: black !important;
+    caret-color: black!important;
+}
+.loc{
+  padding: 12px 12px;
+    background-color: #EF7E35;
+    margin: 12px;
+    border: 1px solid #EF7E35;
+    width: 92%;
+    border-radius:6px;
 }
 </style>

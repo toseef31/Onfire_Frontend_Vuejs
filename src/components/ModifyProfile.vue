@@ -54,7 +54,7 @@
          <h4 class="mt-1 black--text">Change your password</h4>
      
       </v-row>
-      <v-row class="pt-15 bottom mt-16">
+      <v-row class="pt-5 bottom mt-16">
         <v-col class="pa-0 mt-16">
           <v-btn
             @click="update"

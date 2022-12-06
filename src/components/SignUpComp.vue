@@ -14,6 +14,7 @@
             :rules="nameRules"
             label="Name"
             required
+            class="mt-0 pt-0"
           ></v-text-field>
         </v-col>
 
@@ -23,6 +24,7 @@
             :rules="nameRules"
             label="Sur Name"
             required
+            class="mt-0 pt-0"
           ></v-text-field>
         </v-col>
 
@@ -32,6 +34,7 @@
             :rules="emailRules"
             label="E-mail"
             required
+            class="mt-0 pt-0"
           ></v-text-field>
         </v-col>
         <v-col cols="12" md="4" class="pa-0">
@@ -40,6 +43,7 @@
             :rules="mobileRules"
             label="Mobile Number"
             required
+            class="mt-0 pt-0"
           ></v-text-field>
         </v-col>
 
@@ -53,6 +57,7 @@
             :rules="passwordRules"
             :type="[showPassword ? 'text' : 'password']"
             required
+            class="mt-0 pt-0"
           ></v-text-field>
         </v-col>
         <v-col cols="12" md="4" class="pa-0 ma-0">
@@ -62,10 +67,11 @@
             :rules="confirmPasswordRules.concat(passwordConfirmationRule)"
             type="password"
             required
+            class="mt-0 pt-0"
           ></v-text-field>
         </v-col>
       </v-row>
-      <v-row class="pt-15 bottom mt-16">
+      <v-row class="pt-1 bottom mt-16">
         <v-col class="pa-0 mt-16">
           <v-btn
             @click="signup"
@@ -104,7 +110,7 @@
               >
             </div>
           </v-overlay>
-          <p class="text-left #475467-text mt-3" style="font-size: 12px">
+          <p class="text-left #475467-text mt-3 pb-9" style="font-size: 12px">
             By creating an account, you agree to the Terms of Service and
             Privacy Policy
           </p>
