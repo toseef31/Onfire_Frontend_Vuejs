@@ -121,7 +121,7 @@ export default {
   methods: {
     async pageload() {
       let result = await axios.get(
-        "http://138.68.27.231:3000/api/v1/category/getcategories/"+this.$route.params.name
+        "http://138.68.27.231:3000/api/v1/category/getcategories/servicepoint"
       );
       console.log(result);
       this.category = result.data;

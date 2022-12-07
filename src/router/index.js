@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import TodayHome from '../views/TodayHome.vue'
 import VenuPage from '../views/VenuPage.vue'
+import EventPage from '../views/EventPage.vue'
 import ProductPage from '../views/ProductPage.vue'
 import MenuPage from '../views/MenuPage.vue'
 import CartPage from '../views/CartPage.vue'
@@ -43,15 +44,26 @@ const routes = [
   {
     path: '/VenuPage/:id',
     name: 'VenuPage',
-    component: VenuPage
+    component: VenuPage,
+    meta: {
+      title: 'Event'
+  }
+},
+  {
+    path: '/EventPage/:id',
+    name: 'EventPage',
+    component: EventPage,
+    meta: {
+      title: 'Venue'
+  }
   },
   {
-    path: '/ProductPage',
+    path: '/ProductPage/:id',
     name: 'ProductPage',
     component: ProductPage
   },
   {
-    path: '/MenuPage/:name',
+    path: '/MenuPage/:pointname',
     name: 'MenuPage',
     component: MenuPage,
     meta: {

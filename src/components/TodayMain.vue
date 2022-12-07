@@ -1,5 +1,5 @@
 <template>
-  <div style="height: auto; min-height: 100vh; background-color: #101828">
+  <div style="height: auto; background-color: #101828">
     <v-container
       fluid
       class="ma-0 pt-0 pb-0 px-0"
@@ -14,7 +14,7 @@
       </v-row>
       <v-row class="px-3 pt-0 pb-0" style="background-color: #1d2939">
         <v-col cols="6" v-for="item in events" :key="item.id">
-          <router-link :to="`/VenuPage/${item.id}`">
+          <router-link :to="`/EventPage/${item.id}`">
             <div class="colum">
               <div>
                 <img
