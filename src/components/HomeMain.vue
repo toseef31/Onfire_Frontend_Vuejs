@@ -1,12 +1,12 @@
 <template>
-   <div style="height: auto;min-height: 100vh;
+   <div style="height: auto;
     background-color:#101828;">
     <div>
  <v-overlay
       :absolute="absolute"
       :opacity="opacity"
       :value="overlay"
-     style="margin-top:-80%;"
+     style="margin-top:-20%;"
     >
       <div
         class="px-1 py-5 mx-5"
@@ -59,7 +59,7 @@
       :absolute="absolute"
       :opacity="opacity"
       :value="location"
-      style="margin-top: -80%"
+      style="margin-top: -20%"
     >
       <div
         class="px-1 py-5 mx-5"
@@ -108,7 +108,7 @@
           </div>
           <h5 class="heading">{{item.eventname}}</h5>
           <p class=" mt-7 mb-1 white--text text-left" style="font-size:10px;">{{item.Dates | formatDate}}</p>
-            <p class="white--text text-left" style="font-size:10px;">{{item.venuename}}</p>
+            <p class="white--text text-left" style="font-size:10px;">{{item.venue.venuename}}</p>
          
         </div>
       </router-link>
