@@ -78,23 +78,14 @@ export default {
         "http://138.68.27.231:3000/api/v1/events/getallbyvenue/" +
           this.$route.params.id
       );
-      
+
       this.events = result.data.data.events;
-      
     },
   },
 };
 </script>
  
  <style>
-.loc {
-  padding: 12px 12px;
-  background-color: #ef7e35;
-  margin: 12px;
-  border: 1px solid #ef7e35;
-  width: 92%;
-  border-radius: 6px;
-}
 .v-btn,
 a {
   text-decoration: none !important;
@@ -108,13 +99,7 @@ h4,
 h5 {
   font-family: roboto;
 }
-.view {
-  float: right;
-  background-color: transparent !important;
-  color: white !important;
-  text-transform: inherit;
-  text-decoration: underline;
-}
+
 .colum {
   background-color: #344054;
   border-radius: 4px;
