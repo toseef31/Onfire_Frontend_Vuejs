@@ -60,21 +60,17 @@
     </v-overlay>
     <v-row style="background-color: #475467">
       <v-col class="px-6 py-7 xaxis">
-        
-          <template v-for="cat in category">
-           
-            <v-btn
+        <template v-for="cat in category">
+          <v-btn
             v-for="item in cat.subcategories"
             :key="item.id"
             :class="`elevation-${hover ? 54 : 14}`"
             class="ma-1 slidebut"
             color="#E4E7EC"
-            style="width: 96px; font-size: 12px; height: 52px;"
+            style="width: 96px; font-size: 12px; height: 52px"
             >{{ item.name }}</v-btn
           >
-       
-          </template>
-       
+        </template>
       </v-col>
     </v-row>
   </div>
@@ -93,7 +89,8 @@ export default {
   },
   data() {
     return {
-     category: [],
+      category: [],
+      page: "",
       id: "",
       name: "",
       email: "",
@@ -120,11 +117,19 @@ export default {
 
   methods: {
     async pageload() {
-      let result = await axios.get(
-        "http://138.68.27.231:3000/api/v1/category/getcategories/servicepoint"
-      );
-      console.log(result);
-      this.category = result.data;
+      if (this.$route.params.pointname) {
+        let result = await axios.get(
+          "http://138.68.27.231:3000/api/v1/category/getcategories/servicepoint"
+        );
+        console.log(result);
+        this.category = result.data;
+      } else {
+        let result = await axios.get(
+          "http://138.68.27.231:3000/api/v1/category/getcategories/foodservicepoint"
+        );
+        console.log(result);
+        this.category = result.data;
+      }
     },
     onSuccess(googleUser) {
       console.log("google success");

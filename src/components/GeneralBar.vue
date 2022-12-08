@@ -15,16 +15,16 @@
       </v-row>
       <v-row>
         <v-col cols="6">
-          <p class="white--text float-left mb-0">Choose Where to order</p>
+          <p class="white--text float-left mb-0" style="font-size:14px;">Choose Where to order</p>
         </v-col>
         <v-col cols="6">
-          <p class="white--text float-right mr-2 mt-0 mb-0" style="font-size:12px;">
+          <a :href="`http://138.68.27.231:3000/projectdata/downloadmenu/${eventmenu}`" download="download"><p class="white--text float-right mr-2 mt-0 mb-0" style="font-size:12px;">
             View Menu<img
               width="23px"
               class="mb-n1 ml-3"
               src="@/assets/men.png"
             />
-          </p>
+          </p></a>
         </v-col>
       </v-row>
     </div>
@@ -36,7 +36,7 @@
         v-for="item in events.servicepoint"
         :key="item.id"
       >
-        <router-link :to="`/MenuPage/${item.pointname}`">
+        <router-link :to=" item.pointname != 'Food' ? `/MenuPage/${item.pointname}/${item.id}` : `/FoodPage/${item.id}`">
           
           <div>
             <img
@@ -81,7 +81,8 @@ export default {
       events: [],
       servicepoint: [],
       id: "",
-      ticket:""
+      ticket:"",
+      eventmenu:""
     };
   },
   mounted() {
@@ -97,6 +98,8 @@ export default {
       this.events = result.data.data.event;
       this.ticket=result.data.data.event.tickets;
       console.log("ticket:" +this.Ticket);
+      this.eventmenu=result.data.data.event.eventmenu;
+      console.log("ticket:" +this.eventmenu);
     },
   },
 };
