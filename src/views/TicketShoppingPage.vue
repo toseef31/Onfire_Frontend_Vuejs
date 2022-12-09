@@ -1,9 +1,8 @@
 <template>
-    <div style="height: auto;min-height: 100vh;
-    background-color:#475467;">
+    <div>
       
       <VenuPageHeader/>
-      <VenuComp/>
+      <TicketShopping/>
       <FooterMain/>
     </div>
   </template>
@@ -11,14 +10,14 @@
   <script>
   // @ is an alias to /src
   import VenuPageHeader from '@/components/VenuPageHeader.vue'
-  import VenuComp from '@/components/VenuComp.vue'
+  import TicketShopping from '@/components/TicketShopping.vue'
   import FooterMain from '@/components/FooterMain.vue'
   
   export default {
-    name: 'VenuPage',
+    name: 'TicketShoppingPage',
     components: {
         VenuPageHeader,
-      VenuComp,
+        TicketShopping,
       FooterMain
     }
   }

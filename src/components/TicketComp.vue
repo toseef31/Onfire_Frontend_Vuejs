@@ -107,8 +107,35 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "TicketComp",
+  data() {
+    return {
+      name: "",
+      tickets: [],
+      servicepoint: [],
+      id: "",
+      ticket:"",
+      eventmenu:""
+    };
+  },
+  mounted() {
+    this.pageload();
+  },
+  methods: {
+    async pageload() {
+      let result = await axios.get(
+        "http://138.68.27.231:3000/api/v1/ticket/getticket/" +
+          this.$route.params.id
+      );
+
+      this.tickets = result.data.data.event;
+      this.ticket=result.data.data.event.tickets;
+      console.log("ticket:" +this.Ticket);
+      
+    },
+  },
 };
 </script>
 

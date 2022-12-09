@@ -6,8 +6,11 @@
           <div class="pb-16 mt-1">
             <img
               width="100%"
-              height="188px"
+              min-height="188px" height="100%"
               crossorigin="anonymous"
+              style="border-style: none;
+    border: 1px solid;
+    border-radius: 3px;"
               :src="`http://138.68.27.231:3000/projectdata/eventspic/${events.eventimage}`"
             />
           </div>
@@ -40,8 +43,7 @@
           
           <div>
             <img
-              width="40%"
-              height="35px"
+              width="40%" min-height="35px!important"
               crossorigin="anonymous"
               :src="`http://138.68.27.231:3000/projectdata/servicepoint/${item.pointimage}`"
             />
@@ -112,7 +114,7 @@ export default {
   padding: 5px 0px!important;
   background-color: #d0d5dd;
   margin: 20px 17px 20px 10px ;
-  box-shadow: 0px 0px 15px 0px black;
+  box-shadow: 2px 2px 5px black;
  
 }
 </style>

@@ -4,7 +4,9 @@
 <v-row class="pb-0">
 <v-col>
             <div>
-            <div ><img width="100%" height="188px" crossorigin="anonymous" :src="`http://138.68.27.231:3000/projectdata/eventspic/${events.eventimage}`" />
+            <div ><img width="100%" height="100%" style="border-style: none;
+    border: 1px solid;
+    border-radius: 3px;" crossorigin="anonymous" :src="`http://138.68.27.231:3000/projectdata/eventspic/${events.eventimage}`" />
          </div>
             <h3 class="heading mt-7">{{events.eventname}}</h3>
             <p class=" mt-16 mb-0 white--text text-left">{{events.Dates | formatDate}}</p>
@@ -14,7 +16,7 @@
             <p class="white--text text-left pb-16">{{events.venue.Location.address}} </p>
             </v-col>
             <v-col cols="2">
-                <img class="mt-n1" width="100%" src="@/assets/google-maps.png" />
+                <img class="mt-n1" width="100%" min-height="90px" src="@/assets/google-maps.png" />
             </v-col>
             </v-row>
         </div>
@@ -23,7 +25,7 @@
  </div>
  <v-row  v-show="ticket" style="background-color: #475467;" class="px-4 py-2">
    <v-col v-show="ticket" cols="6" class="px-1 py-7">
-    <router-link to="/TicketPage"> <div class="imgstyle"><img width="30%" src="@/assets/ticket-main.png" />
+    <router-link :to="`/TicketShoppingPage/${id}`"> <div class="imgstyle"><img width="30%" src="@/assets/ticket-main.png" />
     <h2 class="black--text" style="font-size: 12px;">Buy Tickets</h2></div></router-link>
 </v-col>
 <v-col cols="6"  class="px-1 py-7">
