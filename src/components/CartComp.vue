@@ -144,7 +144,7 @@
           v-model="Coupon"
           :rules="couponRule"
           class="white--text input"
-          label="Add Your Deisocunt Code here!"
+          label="Add Your Discount Code here!"
           color="white"
           dark
           required

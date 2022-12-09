@@ -6,7 +6,7 @@
         <v-row class="px-2 py-2 flex-grow-1">
           <v-col cols="6" class="px-1 py-1"  v-for="item in products"
         :key="item.id">
-            <router-link to="/ProductPage">
+            <router-link to="/PizzasPage">
               <div class="im px-5 py-6">
                 <v-row class="d-inline-flex">
                   <img

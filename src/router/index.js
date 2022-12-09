@@ -9,6 +9,7 @@ import MenuPage from '../views/MenuPage.vue'
 import CartPage from '../views/CartPage.vue'
 import MenuTextPage from '../views/MenuTextPage.vue'
 import TicketPage from '../views/TicketPage.vue'
+import TicketShoppingPage from '../views/TicketShoppingPage.vue'
 import OrdersPage from '../views/OrdersPage.vue'
 import OrdersQrPage from '../views/OrdersQrPage.vue'
 import MyProfilePage from '../views/MyProfilePage.vue'
@@ -82,6 +83,14 @@ const routes = [
     path: '/MenuTextPage',
     name: 'MenuTextPage',
     component: MenuTextPage
+  },
+  {
+    path: '/TicketShoppingPage/:id',
+    name: 'TicketShoppingPage',
+    component: TicketShoppingPage,
+    meta: {
+      title: 'Tickets'
+  }
   },
   {
     path: '/TicketPage',

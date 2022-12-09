@@ -16,7 +16,7 @@
   import FooterMain from '@/components/FooterMain.vue'
   
   export default {
-    name: 'OrdersPage',
+    name: 'PizzasPage',
     components: {
         VenuPageHeader,
         PizzasComp,
