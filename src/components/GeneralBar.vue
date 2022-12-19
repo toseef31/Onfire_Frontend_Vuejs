@@ -39,16 +39,16 @@
         v-for="item in events.servicepoint"
         :key="item.id"
       >
-        <router-link :to=" item.pointname != 'Food' ? `/MenuPage/${item.pointname}/${item.id}` : `/FoodPage/${item.id}`">
+        <router-link :to=" item.pointname != 'Food' ? `/MenuPage/${item.id}` : `/FoodPage/${item.id}`">
           
           <div>
             <img
-              width="40%" min-height="35px!important"
+              width="40%" height="35px!important"
               crossorigin="anonymous"
               :src="`http://138.68.27.231:3000/projectdata/servicepoint/${item.pointimage}`"
             />
 
-            <h6 class="black--text .justify-center" style="font-size:12px;">{{ item.pointname }}</h6>
+            <h6 class="black--text" style="font-size:12px;text-align: left!important;">{{ item.pointname }}</h6>
             </div>
          </router-link
         >
@@ -59,12 +59,28 @@
         v-show="ticket"
       >
 
-        <router-link to="/TicketPage">
+        <router-link :to="`/TicketShoppingPage/${id}`">
           
             <img width="40%"
               height="35px" src="@/assets/ticket-main.png" />
             
             <h6 class="black--text .justify-center" style="font-size:12px;">Tickets</h6>
+            
+         </router-link
+        >
+      </v-col>
+      <v-col
+        cols="3"
+        class=" imgstyle .justify-center"
+        v-show="food"
+      >
+
+        <router-link :to="`/FoodPage/food/${id}`">
+          
+            <img width="40%"
+              height="35px" src="@/assets/truck.png" />
+            
+            <h6 class="black--text .justify-center" style="font-size:12px;">Food</h6>
             
          </router-link
         >
@@ -84,6 +100,7 @@ export default {
       servicepoint: [],
       id: "",
       ticket:"",
+      food:"",
       eventmenu:""
     };
   },
@@ -98,10 +115,13 @@ export default {
       );
 
       this.events = result.data.data.event;
-      this.ticket=result.data.data.event.tickets;
+      this.ticket=result.data.data.event.Tickets;
+      this.food=result.data.data.event.food_service;
       console.log("ticket:" +this.Ticket);
+      console.log("food:" +this.food);
       this.eventmenu=result.data.data.event.eventmenu;
-      console.log("ticket:" +this.eventmenu);
+      console.log("menu" +this.eventmenu);
+      this.id=result.data.data.event._id;
     },
   },
 };

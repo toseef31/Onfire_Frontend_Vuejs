@@ -1,113 +1,105 @@
 <template>
   <div>
-   
-    <div class="pt-8 pb-11" style="background-color: #1D2939">
-      <v-row class="px-5" v-for="item in tickets"
-        :key="item.id">
-        
+    <div class="pt-8 pb-11" style="background-color: #1d2939">
+      <v-row class="px-5" v-for="item in tickets" :key="item.id">
         <v-col cols="9" class="pa-2">
-          <p class="white--text  mt-1 mb-0 pa-0" style="font-size:14px; font-weight:400;">
-            {{item.ticketname}}
+          <p
+            class="white--text mt-1 mb-0 pa-0"
+            style="font-size: 14px; font-weight: 400"
+          >
+            {{ item.ticketname }}
           </p>
-          <p class="white--text mb-1 mt-0 pa-0 " style="font-size:14px; font-weight:400;">{{item.price}}</p>
+          <p
+            class="white--text mb-1 mt-0 pa-0"
+            style="font-size: 14px; font-weight: 400"
+          >
+            {{ item.price }}
+          </p>
         </v-col>
-        <v-col cols="1" class="pt-0 mt-3">
+        <v-col v-if="item.ticketquantity < 1" cols="3" class="pt-0 mt-3">
+          <v-btn
+            @click="addtocart(item)"
+            color="#EF7E35"
+            class="float-right mt-0"
+            style="font-size: 14px; font-weight: 400; text-transform: none"
+            >Add</v-btn
+          >
+        </v-col>
+        <v-col v-if="item.ticketquantity != 0" cols="1" class="pt-0 mt-3">
           <v-btn
             class="mr-n3 mt-2"
-            @click="decrease"
+            @click="decrease(item)"
             style="
               background-color: transparent;
               border: 1px solid #ef7e35;
               min-width: 14px;
               width: 14px;
               height: 21px;
-    padding: 0px 10px;
+              padding: 0px 10px;
               float: right;
             "
-            ><v-icon color="#EF7E35" style="font-size:21px;">mdi-minus</v-icon></v-btn
+            ><v-icon color="#EF7E35" style="font-size: 21px"
+              >mdi-minus</v-icon
+            ></v-btn
           >
         </v-col>
-        <v-col cols="1" class="pt-0 mt-2 px-0">
-          <h3 class="white--text mt-3 ml-n1" style="font-size:14px;">{{ counter }}</h3>
+        <v-col v-if="item.ticketquantity != 0" cols="1" class="pt-0 mt-2 px-0">
+          <h3 class="white--text mt-3 ml-n1" style="font-size: 14px">
+            {{ item.ticketquantity }}
+          </h3>
         </v-col>
-        <v-col cols="1" class="pt-0 mt-3">
+        <v-col v-if="item.ticketquantity != 0" cols="1" class="pt-0 mt-3">
           <v-btn
             class="ml-n3 mt-2"
-            @click="add"
-            style="
-               background-color: transparent;
-              border: 1px solid #ef7e35;
-              min-width: 18px;
-              width: 18px;
-              height: 21px;
-    padding: 0px 10px;
-              float: right;
-            "
-            ><v-icon color="#EF7E35" style="font-size:21px;">mdi-plus</v-icon></v-btn
-          >
-        </v-col>
-      </v-row>
-      <v-row class="px-5">
-        
-        <v-col cols="9" class="pa-2">
-          <p class="white--text  mt-1 mb-0 pa-0" style="font-size:14px; font-weight:400;">
-            GNERAL ADMISSION
-          </p>
-          <p class="white--text mb-1 mt-0 pa-0 " style="font-size:14px; font-weight:400;">$89.000</p>
-        </v-col>
-        
-        
-        <v-col v-show="!cartbutton" cols="3" class="pt-0 mt-3">
-          <v-btn @click="addtocart" color="#EF7E35" class="float-right mt-0" style="font-size:14px; font-weight:400;text-transform: none;">Add</v-btn>
-        </v-col>
-        <v-col v-show="cartbutton" cols="1" class="pt-0 mt-3">
-          <v-btn
-            class="mr-n3 mt-2"
-            @click="decrease"
+            @click="add(item)"
             style="
               background-color: transparent;
               border: 1px solid #ef7e35;
-              min-width: 14px;
-              width: 14px;
-              height: 21px;
-    padding: 0px 10px;
-              float: right;
-            "
-            ><v-icon color="#EF7E35" style="font-size:21px;">mdi-minus</v-icon></v-btn
-          >
-        </v-col>
-        <v-col v-show="cartbutton" cols="1" class="pt-0 mt-2 px-0">
-          <h3 class="white--text mt-3 ml-n1" style="font-size:14px;">{{ counter }}</h3>
-        </v-col>
-        <v-col v-show="cartbutton" cols="1" class="pt-0 mt-3">
-          <v-btn
-            class="ml-n3 mt-2"
-            @click="add"
-            style="
-               background-color: transparent;
-              border: 1px solid #ef7e35;
               min-width: 18px;
               width: 18px;
               height: 21px;
-    padding: 0px 10px;
+              padding: 0px 10px;
               float: right;
             "
-            ><v-icon color="#EF7E35" style="font-size:21px;">mdi-plus</v-icon></v-btn
+            ><v-icon color="#EF7E35" style="font-size: 21px"
+              >mdi-plus</v-icon
+            ></v-btn
           >
         </v-col>
       </v-row>
-      
+
       <v-row class="px-4 pb-16">
         <v-col>
-          <h4 class="white--text text-left" style="font-size:14px; font-weight:500;">BUY YOUR PARKING PASS TO ACCESS THE CAR PARKING IMMEDIATELY</h4>
+          <h4
+            class="white--text text-left"
+            style="font-size: 14px; font-weight: 500"
+          >
+            BUY YOUR PARKING PASS TO ACCESS THE CAR PARKING IMMEDIATELY
+          </h4>
         </v-col>
       </v-row>
-      <v-row class="px-0 pb-1 mx-4" style="border: 1px solid #475467;
-border-radius: 4px;">
+      <v-row
+        class="px-0 pb-1 mx-4"
+        style="border: 1px solid #475467; border-radius: 4px"
+      >
         <v-col>
-          <p class="white--text mb-3" style="font-size:10px; font-weight:500;">Terms and Condition</p>
-          <p class="white--text text-left mb-2" style="font-size:10px; font-weight:500;"> * The pre-sale will be available with a 20% discount for 48 hours, starting on Thursday, November 11,</p>
-          <p class="white--text text-left mt-0 mb-0" style="font-size:10px; font-weight:500;">  from 11am to Saturday 13 until 11am, or until the stock of tickets available for this pre-sale is exhausted (ticket stock 5,000).</p>
+          <p class="white--text mb-3" style="font-size: 10px; font-weight: 500">
+            Terms and Condition
+          </p>
+          <p
+            class="white--text text-left mb-2"
+            style="font-size: 10px; font-weight: 500"
+          >
+            * The pre-sale will be available with a 20% discount for 48 hours,
+            starting on Thursday, November 11,
+          </p>
+          <p
+            class="white--text text-left mt-0 mb-0"
+            style="font-size: 10px; font-weight: 500"
+          >
+            from 11am to Saturday 13 until 11am, or until the stock of tickets
+            available for this pre-sale is exhausted (ticket stock 5,000).
+          </p>
         </v-col>
       </v-row>
     </div>
@@ -158,18 +150,20 @@ border-radius: 4px;">
           required
         ></v-text-field>
         <p class="white--text float-left mt-1">Discount: $750</p>
-        <v-btn @click="overlay = !overlay" color="#EF7E35" class="px-10 py-8" style="font-size:14px;"
-          >PAY FOR YOUR TICKETS - $50.50</v-btn
+        <v-btn
+          @click="overlay = !overlay"
+          color="#EF7E35"
+          class="px-10 py-8"
+          style="font-size: 14px"
+          >PAY FOR YOUR TICKETS - ${{ total }}</v-btn
         >
       </v-col>
-
-      
     </v-row>
   </div>
 </template>
   
   <script>
-  import axios from "axios";
+import axios from "axios";
 export default {
   name: "TicketShoppingComp",
   data() {
@@ -178,17 +172,19 @@ export default {
       opacity: 0,
       overlay: false,
       tickets: [],
+      purchasedtickets: [],
       id: "",
-      ticket:"",
+      ticket: "",
       counter: 0,
-      cartbutton:false,
+      cartbutton: false,
+      total: "0",
     };
   },
   mounted() {
     this.pageload();
   },
-  methods: {
 
+  methods: {
     async pageload() {
       let result = await axios.get(
         "http://138.68.27.231:3000/api/v1/ticket/getticket/" +
@@ -196,23 +192,47 @@ export default {
       );
 
       this.tickets = result.data.data.arr;
-      
-      console.log("ticket:" +this.tickets);
-      
+
+      console.log("ticket:" + this.tickets);
     },
-    add() {
-      this.counter += 1;
-    },
-    decrease() {
-      if (this.counter != 0) {
-        this.counter -= 1;
+    add(item) {
+      item.ticketquantity += 1;
+      this.purchasedtickets.push({
+        
+        ticketquantity: item.ticketquantity,
+       
+      });
+      console.log(this.purchasedtickets);
+      for (let i = 0; i < this.purchasedtickets.length; i++) {
+        this.total =
+          this.purchasedtickets[i].ticketprice *
+          this.purchasedtickets[i].ticketquantity;
       }
+      console.log("Total is" + this.total);
     },
-    addtocart(){
-        this.cartbutton=!this.cartbutton;
-    }
-    
+    decrease(item) {
+      if (item.ticketquantity != 0) {
+        item.ticketquantity -= 1;
+      }
+      
+    },
+    addtocart(item) {
+      console.log("added");
+      item.ticketquantity += 1;
+      this.total = item.price * item.ticketquantity;
+      console.log("Total is" + this.total);
+
+      this.purchasedtickets.push({
+        ticketname: item.ticketname,
+        ticketprice: item.price,
+        ticketquantity: item.ticketquantity,
+      });
+      console.log(this.purchasedtickets);
+      console.log("item is" + item.ticketname);
+      console.log("quantity is" + item.ticketquantity);
+    },
   },
+  
 };
 </script>
   

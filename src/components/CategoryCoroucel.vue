@@ -59,18 +59,25 @@
       </div>
     </v-overlay>
     <v-row style="background-color: #475467">
-      <v-col class="px-6 py-7 xaxis">
-        <template v-for="cat in category">
+      <v-col class="px-6 py-4 xaxis">
+        <v-btn
+            
+            :class="`elevation-${hover ? 54 : 14}`"
+            class="ma-1 slidebut"
+            color="#E4E7EC"
+            style="width: 96px; font-size: 12px; height: 52px"
+            >Favorites</v-btn
+          >
           <v-btn
-            v-for="item in cat.subcategories"
+            v-for="item in category"
             :key="item.id"
             :class="`elevation-${hover ? 54 : 14}`"
             class="ma-1 slidebut"
             color="#E4E7EC"
             style="width: 96px; font-size: 12px; height: 52px"
-            >{{ item.name }}</v-btn
+            >{{item }}</v-btn
           >
-        </template>
+       
       </v-col>
     </v-row>
   </div>
@@ -117,18 +124,22 @@ export default {
 
   methods: {
     async pageload() {
-      if (this.$route.params.pointname) {
+      console.log(this.$route.name);
+      if (this.$route.name=='FoodPage') {
         let result = await axios.get(
-          "http://138.68.27.231:3000/api/v1/category/getcategories/servicepoint"
+          "http://138.68.27.231:3000/api/v1/service/getfscategories/"+
+          this.$route.params.id
         );
-        console.log(result);
-        this.category = result.data;
+        this.category = result.data.data.servicepoint;
+        console.log("if: "+ result.data.data.servicepoint);
       } else {
         let result = await axios.get(
-          "http://138.68.27.231:3000/api/v1/category/getcategories/foodservicepoint"
+          "http://138.68.27.231:3000/api/v1/service/getspmcategories/"+
+          this.$route.params.id
         );
-        console.log(result);
-        this.category = result.data;
+        
+        this.category = result.data.data.servicepoint;
+        console.log("else: "+ result.data.data.servicepoint);
       }
     },
     onSuccess(googleUser) {

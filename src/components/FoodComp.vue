@@ -59,7 +59,7 @@
           this.$route.params.id
       );
 
-      this.products = result.data.data.servicepoint.food_servicepoints;
+      this.products = result.data.data.fservicepoint;
       
     },
   },
