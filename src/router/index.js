@@ -64,7 +64,7 @@ const routes = [
     component: ProductPage
   },
   {
-    path: '/MenuPage/:pointname/:id',
+    path: '/MenuPage/:id',
     name: 'MenuPage',
     component: MenuPage,
     meta: {
@@ -181,7 +181,7 @@ const routes = [
   }
   },
   {
-    path: '/FoodPage/:id',
+    path: '/FoodPage/food/:id',
     name: 'FoodPage',
     component: FoodPage,
     meta: {

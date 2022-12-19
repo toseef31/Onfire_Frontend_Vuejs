@@ -122,6 +122,7 @@
     
     <script>
 import axios from "axios";
+import setAuthHeader from "../utils/setAuthHeader";
 export default {
   name: "SignUpComp",
 
@@ -205,7 +206,8 @@ export default {
           if (result.status == 200) {
             (this.error = ""), (this.overlay = !this.overlay);
 
-            localStorage.setItem("user-info", JSON.stringify(result.data));
+            localStorage.setItem("user-info", JSON.stringify(result.data.data.user));
+            setAuthHeader(result.data.token);
           }
         } catch (err) {
           //  console.log("catched: ", err.message);
