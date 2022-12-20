@@ -43,12 +43,12 @@
           
           <div>
             <img
-              width="40%" height="35px!important"
+              width="40%" height="40px!important"
               crossorigin="anonymous"
               :src="`http://138.68.27.231:3000/projectdata/servicepoint/${item.pointimage}`"
             />
 
-            <h6 class="black--text" style="font-size:12px;text-align: left!important;">{{ item.pointname }}</h6>
+            <h6 class="black--text" style="font-size:12px;text-align: center!important;">{{ item.pointname }}</h6>
             </div>
          </router-link
         >
@@ -62,7 +62,7 @@
         <router-link :to="`/TicketShoppingPage/${id}`">
           
             <img width="40%"
-              height="35px" src="@/assets/ticket-main.png" />
+              height="40px" src="@/assets/ticket-main.png" />
             
             <h6 class="black--text .justify-center" style="font-size:12px;">Tickets</h6>
             
@@ -78,7 +78,7 @@
         <router-link :to="`/FoodPage/food/${id}`">
           
             <img width="40%"
-              height="35px" src="@/assets/truck.png" />
+              height="40px" src="@/assets/truck.png" />
             
             <h6 class="black--text .justify-center" style="font-size:12px;">Food</h6>
             

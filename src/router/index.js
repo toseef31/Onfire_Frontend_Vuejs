@@ -6,6 +6,7 @@ import VenuPage from '../views/VenuPage.vue'
 import EventPage from '../views/EventPage.vue'
 import ProductPage from '../views/ProductPage.vue'
 import MenuPage from '../views/MenuPage.vue'
+import CategoryProductsPage from '../views/CategoryProductsPage.vue'
 import CartPage from '../views/CartPage.vue'
 import MenuTextPage from '../views/MenuTextPage.vue'
 import TicketPage from '../views/TicketPage.vue'
@@ -67,6 +68,14 @@ const routes = [
     path: '/MenuPage/:id',
     name: 'MenuPage',
     component: MenuPage,
+    meta: {
+      title: 'Menu'
+  }
+  },
+  {
+    path: '/MenuPage/:id/Category/:item',
+    name: 'CategoryProductsPage',
+    component: CategoryProductsPage,
     meta: {
       title: 'Menu'
   }

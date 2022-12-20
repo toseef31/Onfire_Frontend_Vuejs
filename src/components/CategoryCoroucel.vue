@@ -65,19 +65,23 @@
             :class="`elevation-${hover ? 54 : 14}`"
             class="ma-1 slidebut"
             color="#E4E7EC"
-            style="width: 96px; font-size: 12px; height: 52px"
-            >Favorites</v-btn
+            style="width: 96px; font-size: 12px; height: 52px;text-transform: none;"
+            >Favourites</v-btn
           >
+        
+        <div v-for="item in category"
+            :key="item.id">
+            <router-link :to="`/MenuPage/${this.eventid}/category/${item}`">
           <v-btn
-            v-for="item in category"
-            :key="item.id"
+          
             :class="`elevation-${hover ? 54 : 14}`"
             class="ma-1 slidebut"
             color="#E4E7EC"
-            style="width: 96px; font-size: 12px; height: 52px"
+            style="width: 96px; font-size: 12px; height: 52px;text-transform: none;"
             >{{item }}</v-btn
           >
-       
+        </router-link>
+      </div>
       </v-col>
     </v-row>
   </div>
@@ -99,6 +103,7 @@ export default {
       category: [],
       page: "",
       id: "",
+      eventid:"",
       name: "",
       email: "",
       overlay: true,
@@ -132,6 +137,9 @@ export default {
         );
         this.category = result.data.data.servicepoint;
         console.log("if: "+ result.data.data.servicepoint);
+
+        this.eventid=this.$route.params.id;
+        console.log(this.eventid);
       } else {
         let result = await axios.get(
           "http://138.68.27.231:3000/api/v1/service/getspmcategories/"+
@@ -140,6 +148,8 @@ export default {
         
         this.category = result.data.data.servicepoint;
         console.log("else: "+ result.data.data.servicepoint);
+        this.eventid=this.$route.params.id;
+        console.log(this.eventid);
       }
     },
     onSuccess(googleUser) {

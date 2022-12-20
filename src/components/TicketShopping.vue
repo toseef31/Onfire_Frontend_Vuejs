@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="pt-8 pb-11" style="background-color: #1d2939">
+    <div class="pt-8 pb-7" style="background-color: #1d2939">
       <v-row class="px-5" v-for="item in tickets" :key="item.id">
         <v-col cols="9" class="pa-2">
           <p
@@ -28,7 +28,7 @@
         <v-col v-if="item.ticketquantity != 0" cols="1" class="pt-0 mt-3">
           <v-btn
             class="mr-n3 mt-2"
-            @click="decrease(item)"
+            @click="decrease(state, item)"
             style="
               background-color: transparent;
               border: 1px solid #ef7e35;
@@ -51,7 +51,7 @@
         <v-col v-if="item.ticketquantity != 0" cols="1" class="pt-0 mt-3">
           <v-btn
             class="ml-n3 mt-2"
-            @click="add(item)"
+            @click="add(state, item)"
             style="
               background-color: transparent;
               border: 1px solid #ef7e35;
@@ -68,7 +68,7 @@
         </v-col>
       </v-row>
 
-      <v-row class="px-4 pb-16">
+      <v-row class="px-4 pb-6">
         <v-col>
           <h4
             class="white--text text-left"
@@ -172,11 +172,10 @@ export default {
       opacity: 0,
       overlay: false,
       tickets: [],
-      purchasedtickets: [],
-      id: "",
+      state: { purchasedtickets: [] },
+      event: "",
       ticket: "",
-      counter: 0,
-      cartbutton: false,
+      
       total: "0",
     };
   },
@@ -192,47 +191,75 @@ export default {
       );
 
       this.tickets = result.data.data.arr;
+      this.event = this.$route.params.id;
+      console.log( "event id"+this.event);
+    },
+    add(state, item) {
+      console.log("id is" + item.id);
+      let found = state.purchasedtickets.find(
+        (product) => product.id == item.id
+      );
+      console.log(found);
+      if (found) {
+        found.ticketquantity += 1;
+        item.ticketquantity += 1;
+        console.log("if");
+      } else {
+        state.purchasedtickets.push(item);
+        console.log("else");
+      }
+      console.log(state.purchasedtickets);
+      //item.ticketquantity += 1;
+      // this.purchasedtickets.push({
+      // ticketquantity: item.ticketquantity,
+      // });
+      // console.log(this.purchasedtickets);
+      // for (let i = 0; i < this.purchasedtickets.length; i++) {
+      //    this.total =
+      //      this.purchasedtickets[i].ticketprice *
+      //      this.purchasedtickets[i].ticketquantity;
+      //  }
+      //   console.log("Total is" + this.total);
+    },
+    decrease(state, item) {
+      let found = state.purchasedtickets.find(
+        (product) => product.id == item.id
+      );
+      console.log(found);
+      if (found) {
+        if (found.ticketquantity != 0) {
+          found.ticketquantity -= 1;
+          item.ticketquantity--;
+          console.log("inside if");
+        }
+        if (found.ticketquantity == 0) {
+          state.purchasedtickets.splice(item, 1);
 
-      console.log("ticket:" + this.tickets);
-    },
-    add(item) {
-      item.ticketquantity += 1;
-      this.purchasedtickets.push({
-        
-        ticketquantity: item.ticketquantity,
-       
-      });
-      console.log(this.purchasedtickets);
-      for (let i = 0; i < this.purchasedtickets.length; i++) {
-        this.total =
-          this.purchasedtickets[i].ticketprice *
-          this.purchasedtickets[i].ticketquantity;
+          console.log("else inside");
+        }
       }
-      console.log("Total is" + this.total);
-    },
-    decrease(item) {
-      if (item.ticketquantity != 0) {
-        item.ticketquantity -= 1;
-      }
-      
+
+      console.log(state.purchasedtickets);
+      console.log("event id" + this.event);
     },
     addtocart(item) {
       console.log("added");
+
       item.ticketquantity += 1;
       this.total = item.price * item.ticketquantity;
       console.log("Total is" + this.total);
 
-      this.purchasedtickets.push({
+      this.state.purchasedtickets.push({
         ticketname: item.ticketname,
         ticketprice: item.price,
         ticketquantity: item.ticketquantity,
+        id: item.id,
       });
-      console.log(this.purchasedtickets);
+      console.log(this.state.purchasedtickets);
       console.log("item is" + item.ticketname);
       console.log("quantity is" + item.ticketquantity);
     },
   },
-  
 };
 </script>
   
@@ -252,7 +279,7 @@ p {
   text-align: left;
 }
 .v-btn:not(.v-btn--round).v-size--default {
-  height: 29px;
+  height: 26px;
 
   padding: 0 13px;
 }
