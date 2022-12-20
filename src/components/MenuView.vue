@@ -16,12 +16,12 @@
       <v-row class="px-2 py-2 pb-10">
         <v-col
           cols="4"
-          class="px-1 py-1 .justify-center"
+          class="px-1 py-1 .justify-center im"
          
           v-for="item in products"
           :key="item.id"
         >
-          <div class="im px-5 py-6">
+          <div class=" px-5 py-4">
             <v-row class="d-inline-flex">
               <img
                 width="100%"
@@ -50,7 +50,7 @@
               <v-btn
                 @click="addtocart(item)"
                 color="#EF7E35"
-                class="float-right mt-6"
+                class="float-right mt-2"
                 >Add</v-btn
               >
             </v-row>
@@ -58,7 +58,7 @@
               <v-col cols="4" class="pt-0 mt-3">
                 <v-btn
                   class="mr-n3 mt-2"
-                  @click="decrease(item)"
+                  @click="decrease(state,item)"
                   style="
                     background-color: transparent;
                     border: 1px solid #ef7e35;
@@ -81,7 +81,7 @@
               <v-col cols="4" class="pt-0 mt-3">
                 <v-btn
                   class="ml-n3 mt-2"
-                  @click="add(item)"
+                  @click="add(state,item)"
                   style="
                     background-color: transparent;
                     border: 1px solid #ef7e35;
@@ -111,7 +111,7 @@ export default {
   data() {
     return {
       counter: 0,
-      cart: [],
+      state: {cart: []},
       products: [],
       
      
@@ -131,13 +131,43 @@ export default {
       this.products = result.data.data.servicepoint.pointmenu;
     },
 
-    add(item) {
-      item.quantity += 1;
-    },
-    decrease(item) {
-      if (item.quantity != 0) {
-        item.quantity -= 1;
+    add(state, item) {
+      console.log(item._id);
+      console.log("id is" + item._id);
+      let found = state.cart.find(
+        (product) => product.id == item._id
+      );
+      console.log(found);
+      if (found) {
+        found.itemquantity += 1;
+        item.quantity += 1;
+        console.log("if");
+      } else {
+        state.cart.push(item);
+        console.log("else");
       }
+      console.log(state.cart);
+    },
+    decrease(state,item) {
+      console.log(item._id);
+      let found = state.cart.find(
+        (product) => product.id == item._id
+      );
+      console.log(found);
+      if (found) {
+        if (found.itemquantity != 0) {
+          found.itemquantity -= 1;
+          item.quantity--;
+          console.log("inside if");
+        }
+        if (found.itemquantity == 0) {
+          state.cart.splice(item, 1);
+
+          console.log("else inside");
+        }
+
+      }
+      console.log(state.cart);
     },
     addtocart(item) {
       
@@ -145,6 +175,13 @@ export default {
       // this.addedtocart=!this.addedtocart;
       //this.addcart=index;
       //this.isCart = true;
+      this.state.cart.push({
+        itemname: item.itemname,
+        itemprice: item.price,
+        itemquantity: item.quantity,
+        id: item._id,
+      });
+      console.log(this.state.cart);
       console.log("item is" + item.itemname);
       console.log("quantity is" + item.quantity);
     },
@@ -157,7 +194,8 @@ export default {
   border: 2px solid #475467;
   border-radius: 4px;
   padding: 6px;
-
+  max-width: 30.333333%;
+    margin: 3px 5px;
   padding-top: 12px;
   background-color: #1d2939;
 }
@@ -166,7 +204,7 @@ export default {
   overflow-x: auto;
 }
 .v-btn:not(.v-btn--round).v-size--default {
-  height: 29px;
+  height: 26px;
 
   padding: 0 13px;
 }
