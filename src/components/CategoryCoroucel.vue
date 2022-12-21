@@ -71,9 +71,8 @@
         
         <div v-for="item in category"
             :key="item.id">
-            <router-link :to="`/MenuPage/${this.eventid}/category/${item}`">
+            <router-link :to="`/MenuPage/${eventid}/category/${item}`">
           <v-btn
-          
             :class="`elevation-${hover ? 54 : 14}`"
             class="ma-1 slidebut"
             color="#E4E7EC"
@@ -139,7 +138,7 @@ export default {
         console.log("if: "+ result.data.data.servicepoint);
 
         this.eventid=this.$route.params.id;
-        console.log(this.eventid);
+        console.log("event id"+this.eventid);
       } else {
         let result = await axios.get(
           "http://138.68.27.231:3000/api/v1/service/getspmcategories/"+
@@ -149,7 +148,7 @@ export default {
         this.category = result.data.data.servicepoint;
         console.log("else: "+ result.data.data.servicepoint);
         this.eventid=this.$route.params.id;
-        console.log(this.eventid);
+        console.log("event id"+this.eventid);
       }
     },
     onSuccess(googleUser) {

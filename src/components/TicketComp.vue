@@ -11,7 +11,8 @@
         </v-row>
       </div>
 
-      <v-row class="pb-1 px-3 mx-2" style="background-color: #344054">
+      <v-row v-for="item in state.ticketsordered"
+            :key="item.id" class="pb-1 px-3 mx-2" style="background-color: #344054">
         <v-col cols="6" class="pa-0 mt-6">
           <img width="100%" src="@/assets/banner189.png" />
         </v-col>
@@ -107,13 +108,12 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   name: "TicketComp",
   data() {
     return {
       name: "",
-      tickets: [],
+      state: { ticketsordered: [] },
       servicepoint: [],
       id: "",
       ticket:"",
@@ -125,14 +125,8 @@ export default {
   },
   methods: {
     async pageload() {
-      let result = await axios.get(
-        "http://138.68.27.231:3000/api/v1/ticket/getticket/" +
-          this.$route.params.id
-      );
-
-      this.tickets = result.data.data.event;
-      this.ticket=result.data.data.event.tickets;
-      console.log("ticket:" +this.Ticket);
+      this.state.ticketsordered = JSON.parse(localStorage.getItem("ticketsordered"));
+      console.log(this.state.ticketsordered);
       
     },
   },

@@ -25,12 +25,12 @@
             <v-row class="d-inline-flex">
               <img
                 width="100%"
-                height="80px"
+                height="60px"
                 crossorigin="anonymous"
                 :src="`http://138.68.27.231:3000/projectdata/servicepointmenu/${item.itemimage}`"
               />
             </v-row>
-            <v-row>
+            <v-row class="mt-0">
               <h4
                 class="white--text"
                 style="font-size: 14px; font-weight: 400;text-align:left;"
@@ -54,8 +54,8 @@
                 >Add</v-btn
               >
             </v-row>
-            <v-row v-if="item.quantity != 0" class="d-flex justify-end">
-              <v-col cols="4" class="pt-0 mt-3">
+            <v-row v-if="item.quantity != 0 && item.quantity > 0" class="d-flex justify-end mt-0">
+              <v-col cols="4" class="pt-0 mt-3 pb-1">
                 <v-btn
                   class="mr-n3 mt-2"
                   @click="decrease(state,item)"
@@ -73,12 +73,12 @@
                   ></v-btn
                 >
               </v-col>
-              <v-col cols="4" class="pt-0 mt-2 px-0">
+              <v-col cols="4" class="pt-0 mt-2 px-0 pb-1">
                 <h3 class="white--text mt-3 ml-n1" style="font-size: 14px">
                   {{ item.quantity }}
                 </h3>
               </v-col>
-              <v-col cols="4" class="pt-0 mt-3">
+              <v-col cols="4" class="pt-0 mt-3 pb-1">
                 <v-btn
                   class="ml-n3 mt-2"
                   @click="add(state,item)"
@@ -147,6 +147,7 @@ export default {
         console.log("else");
       }
       console.log(state.cart);
+      localStorage.setItem("cart", JSON.stringify(this.state.cart));
     },
     decrease(state,item) {
       console.log(item._id);
@@ -155,12 +156,12 @@ export default {
       );
       console.log(found);
       if (found) {
-        if (found.itemquantity != 0) {
+        if (found.itemquantity != 0 && item.quantity != 0) {
           found.itemquantity -= 1;
           item.quantity--;
           console.log("inside if");
         }
-        if (found.itemquantity == 0) {
+        if (found.itemquantity == 0 && item.quantity == 0) {
           state.cart.splice(item, 1);
 
           console.log("else inside");
@@ -168,6 +169,7 @@ export default {
 
       }
       console.log(state.cart);
+      localStorage.setItem("cart", JSON.stringify(this.state.cart));
     },
     addtocart(item) {
       
@@ -184,6 +186,7 @@ export default {
       console.log(this.state.cart);
       console.log("item is" + item.itemname);
       console.log("quantity is" + item.quantity);
+      localStorage.setItem("cart", JSON.stringify(this.state.cart));
     },
   },
 };
@@ -205,7 +208,7 @@ export default {
 }
 .v-btn:not(.v-btn--round).v-size--default {
   height: 26px;
-
+  min-width: 45px;
   padding: 0 13px;
 }
 .v-btn {

@@ -25,7 +25,7 @@
             >Add</v-btn
           >
         </v-col>
-        <v-col v-if="item.ticketquantity != 0" cols="1" class="pt-0 mt-3">
+        <v-col v-if="item.ticketquantity != 0 && item.ticketquantity > 0" cols="1" class="pt-0 mt-3">
           <v-btn
             class="mr-n3 mt-2"
             @click="decrease(state, item)"
@@ -43,12 +43,12 @@
             ></v-btn
           >
         </v-col>
-        <v-col v-if="item.ticketquantity != 0" cols="1" class="pt-0 mt-2 px-0">
+        <v-col v-if="item.ticketquantity != 0 && item.ticketquantity > 0" cols="1" class="pt-0 mt-2 px-0">
           <h3 class="white--text mt-3 ml-n1" style="font-size: 14px">
             {{ item.ticketquantity }}
           </h3>
         </v-col>
-        <v-col v-if="item.ticketquantity != 0" cols="1" class="pt-0 mt-3">
+        <v-col v-if="item.ticketquantity != 0 && item.ticketquantity > 0" cols="1" class="pt-0 mt-3">
           <v-btn
             class="ml-n3 mt-2"
             @click="add(state, item)"
@@ -175,8 +175,8 @@ export default {
       state: { purchasedtickets: [] },
       event: "",
       ticket: "",
-      
-      total: "0",
+      eventdetail:[],
+      total: '0',
     };
   },
   mounted() {
@@ -209,6 +209,13 @@ export default {
         console.log("else");
       }
       console.log(state.purchasedtickets);
+      let total = 0;
+  this.state.purchasedtickets.forEach((el) => {
+    total = total + el.ticketprice * el.ticketquantity;
+  });
+  this.total=total;
+  console.log("TOTal",total);
+      localStorage.setItem("ticketsordered", JSON.stringify(this.state.purchasedtickets));
       //item.ticketquantity += 1;
       // this.purchasedtickets.push({
       // ticketquantity: item.ticketquantity,
@@ -241,6 +248,13 @@ export default {
 
       console.log(state.purchasedtickets);
       console.log("event id" + this.event);
+      let total = 0;
+  this.state.purchasedtickets.forEach((el) => {
+    total = total + el.ticketprice * el.ticketquantity;
+  });
+  this.total=total;
+  console.log("TOTal",total);
+      localStorage.setItem("ticketsordered", JSON.stringify(this.state.purchasedtickets));
     },
     addtocart(item) {
       console.log("added");
@@ -258,6 +272,13 @@ export default {
       console.log(this.state.purchasedtickets);
       console.log("item is" + item.ticketname);
       console.log("quantity is" + item.ticketquantity);
+      let total = 0;
+  this.state.purchasedtickets.forEach((el) => {
+    total = total + el.ticketprice * el.ticketquantity;
+  });
+  this.total=total;
+  console.log("TOTal",total);
+      localStorage.setItem("ticketsordered", JSON.stringify(this.state.purchasedtickets));
     },
   },
 };
