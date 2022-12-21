@@ -17,89 +17,63 @@
       </v-row>
     </div>
     <div class="pt-10 pb-16" style="background-color: #475467">
-      <v-row class="px-9">
-        <v-col cols="1">
+      <v-row  v-for="item in state.cart"
+            :key="item.id" class="px-9">
+           
+        <v-col cols="1" v-if="item.itemquantity != 0 && item.itemquantity > 0">
           <v-btn
-            class="mr-n3 mt-2"
-            @click="decrease"
-            style="
-              background-color: transparent;
-              border: 1px solid #ef7e35;
-              min-width: 29px;
-              width: 29px;
-              float: right;
-            "
-            ><v-icon color="#EF7E35">mdi-minus</v-icon></v-btn
-          >
+                  class="mr-n3 mt-2"
+                  @click="decrease(state,item)"
+                  style="
+                    background-color: transparent;
+                    border: 1px solid #ef7e35;
+                    min-width: 14px;
+                    width: 14px;
+                    height: 21px;
+                    padding: 0px 10px;
+                    float: right;
+                  "
+                  ><v-icon color="#EF7E35" style="font-size: 21px"
+                    >mdi-minus</v-icon
+                  ></v-btn
+                >
         </v-col>
-        <v-col cols="1">
-          <h3 class="white--text mt-2">{{ counter }}</h3>
+        <v-col cols="1" v-if="item.itemquantity != 0 && item.itemquantity > 0">
+          <h3 class="white--text mt-3 ml-n1" style="font-size: 14px">
+                  {{ item.itemquantity }}
+                </h3>
         </v-col>
-        <v-col cols="1">
+        <v-col cols="1" v-if="item.itemquantity != 0 && item.itemquantity > 0">
           <v-btn
-            class="ml-n3 mt-2"
-            @click="add"
-            style="
-              background-color: transparent;
-              border: 1px solid #ef7e35;
-              min-width: 29px;
-              width: 29px;
-              float: left;
-            "
-            ><v-icon color="#EF7E35">mdi-plus</v-icon></v-btn
-          >
+                  class="ml-n3 mt-2"
+                  @click="add(state,item)"
+                  style="
+                    background-color: transparent;
+                    border: 1px solid #ef7e35;
+                    min-width: 18px;
+                    width: 18px;
+                    height: 21px;
+                    padding: 0px 10px;
+                    float: right;
+                  "
+                  ><v-icon color="#EF7E35" style="font-size: 21px"
+                    >mdi-plus</v-icon
+                  ></v-btn
+                >
         </v-col>
         <v-col cols="7" class="pa-2">
           <p class="white--text float-left mt-1">
-            Bot. Chivas Regel 12+ canada Dry that is what
+            {{item.itemname}}
           </p>
         </v-col>
         <v-col cols="2">
-          <h4 class="white--text float-left mt-2">$12.500</h4>
+          <h4 class="white--text float-left mt-2">{{item.itemprice}}</h4>
         </v-col>
       </v-row>
-      <v-row class="px-9">
-        <v-col cols="1">
-          <v-btn
-            class="mr-n3"
-            @click="decrease"
-            style="
-              background-color: transparent;
-              border: 1px solid #ef7e35;
-              min-width: 29px;
-              width: 29px;
-              float: right;
-            "
-            ><v-icon color="#EF7E35">mdi-minus</v-icon></v-btn
-          >
-        </v-col>
-        <v-col cols="1">
-          <h3 class="white--text">{{ counter }}</h3>
-        </v-col>
-        <v-col cols="1">
-          <v-btn
-            class="ml-n3"
-            @click="add"
-            style="
-              background-color: transparent;
-              border: 1px solid #ef7e35;
-              min-width: 29px;
-              width: 29px;
-              float: left;
-            "
-            ><v-icon color="#EF7E35">mdi-plus</v-icon></v-btn
-          >
-        </v-col>
-        <v-col cols="7" class="pa-2">
-          <p class="white--text float-left mt-1">Chelada</p>
-        </v-col>
-        <v-col cols="2">
-          <h4 class="white--text float-left">$89.000</h4>
-        </v-col>
-      </v-row>
+      
       <v-row class="px-4 pb-16">
         <v-col>
-          <h4 class="white--text float-right">General Bar Total: $21.500</h4>
+          <h4 class="white--text float-right">General Bar Total: ${{ total }}</h4>
         </v-col>
       </v-row>
     </div>
@@ -151,7 +125,7 @@
         ></v-text-field>
         <p class="white--text float-left mt-1">Discount: $750</p>
         <v-btn @click="overlay = !overlay" color="#EF7E35" class="px-10 py-8"
-          >PAY FOR YOUR 2 DRINKS - $50.50</v-btn
+          >PAY FOR YOUR 2 DRINKS - ${{ total }}</v-btn
         >
       </v-col>
 
@@ -169,18 +143,95 @@ export default {
       opacity: 0,
       overlay: false,
       counter: 0,
+      state: {cart: []},
+      total:'0'
     };
   },
+  mounted() {
+    this.pageload();
+  },
   methods: {
-    add() {
-      this.counter += 1;
+    async pageload() {
+      this.state.cart = JSON.parse(localStorage.getItem("cart"));
+      console.log(this.state.cart);
+      let total = 0;
+  this.state.cart.forEach((el) => {
+    total = total + el.itemprice * el.itemquantity;
+  });
+  this.total=total;
+  console.log("TOTal",total);
     },
-    decrease() {
-      if (this.counter != 0) {
-        this.counter -= 1;
+    add(state, item) {
+      console.log(item.id);
+      console.log("id is" + item.id);
+      let found = state.cart.find(
+        (product) => product.id == item.id
+      );
+      console.log(found);
+      if (found) {
+        item.itemquantity += 1;
+        console.log("if");
+      } else {
+        state.cart.push(item);
+        console.log("else");
       }
+      console.log(state.cart);
+      let total = 0;
+  this.state.cart.forEach((el) => {
+    total = total + el.itemprice * el.itemquantity;
+  });
+  this.total=total;
+  console.log("TOTal",total);
+      localStorage.setItem("cart", JSON.stringify(this.state.cart));
+    },
+    decrease(state,item) {
+      console.log(item.id);
+      let found = state.cart.find(
+        (product) => product.id == item.id
+      );
+      console.log(found);
+      if (found) {
+        if (found.itemquantity != 0 && item.itemquantity != 0) {
+          
+          item.itemquantity--;
+          console.log("inside if");
+         
+        }
+        if (found.itemquantity == 0 && item.itemquantity == 0) {
+          state.cart.splice(item, 1);
+
+          console.log("else inside");
+        }
+
+      }
+      console.log(state.cart);
+      let total = 0;
+  this.state.cart.forEach((el) => {
+    total = total + el.itemprice * el.itemquantity;
+  });
+  this.total=total;
+  console.log("TOTal",total);
+      localStorage.setItem("cart", JSON.stringify(this.state.cart));
+    },
+    addtocart(item) {
+      
+      item.itemquantity += 1;
+      // this.addedtocart=!this.addedtocart;
+      //this.addcart=index;
+      //this.isCart = true;
+      
+      console.log(this.state.cart);
+      console.log("item is" + item.itemname);
+      console.log("quantity is" + item.quantity);
+      let total = 0;
+  this.state.cart.forEach((el) => {
+    total = total + el.itemprice * el.itemquantity;
+  });
+  this.total=total;
+  console.log("TOTal",total);
     },
   },
+ 
 };
 </script>
   

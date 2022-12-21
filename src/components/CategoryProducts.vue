@@ -54,8 +54,8 @@
                   >Add</v-btn
                 >
               </v-row>
-              <v-row v-if="item.quantity != 0" class="d-flex justify-end">
-                <v-col cols="4" class="pt-0 mt-3">
+              <v-row v-if="item.quantity != 0 && item.quantity > 0" class="d-flex justify-end mt-0">
+                <v-col cols="4" class="pt-0 mt-3 pb-1">
                   <v-btn
                     class="mr-n3 mt-2"
                     @click="decrease(state,item)"
@@ -73,12 +73,12 @@
                     ></v-btn
                   >
                 </v-col>
-                <v-col cols="4" class="pt-0 mt-2 px-0">
+                <v-col cols="4" class="pt-0 mt-2 px-0 pb-1">
                   <h3 class="white--text mt-3 ml-n1" style="font-size: 14px">
                     {{ item.quantity }}
                   </h3>
                 </v-col>
-                <v-col cols="4" class="pt-0 mt-3">
+                <v-col cols="4" class="pt-0 mt-3 pb-1">
                   <v-btn
                     class="ml-n3 mt-2"
                     @click="add(state,item)"
@@ -117,6 +117,16 @@
        
       };
     },
+    computed :{
+        productData(){
+            return this.pageload();
+        }
+    },
+    watch: {
+    '$route': function() {
+        this.pageload();
+    }
+  },
     mounted() {
       this.pageload();
     },
@@ -129,7 +139,7 @@
             this.$route.params.item
         );
   
-        this.products = result.data.data.servicepoint.pointmenu;
+        this.products = result.data.data.obj;
       },
   
       add(state, item) {
