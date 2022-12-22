@@ -39,7 +39,10 @@ export default {
     email: "",
     path: "",
   }),
+  
   async created() {
+    
+    
     this.userdata = JSON.parse(localStorage.getItem("user-info"))._id;
     this.name = JSON.parse(localStorage.getItem("user-info")).name;
     this.email = JSON.parse(localStorage.getItem("user-info")).email;

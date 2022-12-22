@@ -33,7 +33,7 @@
             <v-row class="mt-0">
               <h4
                 class="white--text"
-                style="font-size: 14px; font-weight: 400;text-align:left;"
+                style="font-size: 14px; font-weight: 400;text-align:left;line-height: 14px;"
               >
                 {{ item.itemname }}
               </h4>

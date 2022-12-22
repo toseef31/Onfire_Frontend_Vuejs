@@ -151,7 +151,7 @@
         ></v-text-field>
         <p class="white--text float-left mt-1">Discount: $750</p>
         <v-btn
-          @click="overlay = !overlay"
+          @click="paytickets()"
           color="#EF7E35"
           class="px-10 py-8"
           style="font-size: 14px"
@@ -177,6 +177,7 @@ export default {
       ticket: "",
       eventdetail:[],
       total: '0',
+      
     };
   },
   mounted() {
@@ -191,8 +192,27 @@ export default {
       );
 
       this.tickets = result.data.data.arr;
+      console.log( this.tickets);
       this.event = this.$route.params.id;
       console.log( "event id"+this.event);
+    },
+    async paytickets() {
+      
+     
+      let result = await axios.post(
+            "http://138.68.27.231:3000/api/v1/ticket/create-checkout-session",
+            {
+              cartItems:this.state.purchasedtickets,
+            }
+            
+          ).then(response => {
+                     
+                     window.location.href= response.data.url;
+                     
+                     return response;
+                     
+                   });
+console.log("Result",result);
     },
     add(state, item) {
       console.log("id is" + item.id);
@@ -211,7 +231,7 @@ export default {
       console.log(state.purchasedtickets);
       let total = 0;
   this.state.purchasedtickets.forEach((el) => {
-    total = total + el.ticketprice * el.ticketquantity;
+    total = total + el.price * el.ticketquantity;
   });
   this.total=total;
   console.log("TOTal",total);
@@ -250,7 +270,7 @@ export default {
       console.log("event id" + this.event);
       let total = 0;
   this.state.purchasedtickets.forEach((el) => {
-    total = total + el.ticketprice * el.ticketquantity;
+    total = total + el.price * el.ticketquantity;
   });
   this.total=total;
   console.log("TOTal",total);
@@ -265,16 +285,17 @@ export default {
 
       this.state.purchasedtickets.push({
         ticketname: item.ticketname,
-        ticketprice: item.price,
+        price: item.price,
         ticketquantity: item.ticketquantity,
         id: item.id,
+        event: this.event,
       });
       console.log(this.state.purchasedtickets);
       console.log("item is" + item.ticketname);
       console.log("quantity is" + item.ticketquantity);
       let total = 0;
   this.state.purchasedtickets.forEach((el) => {
-    total = total + el.ticketprice * el.ticketquantity;
+    total = total + el.price * el.ticketquantity;
   });
   this.total=total;
   console.log("TOTal",total);

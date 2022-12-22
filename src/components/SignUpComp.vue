@@ -208,6 +208,7 @@ export default {
 
             localStorage.setItem("user-info", JSON.stringify(result.data.data.user));
             setAuthHeader(result.data.token);
+             localStorage.setItem("token", result.data.token);
           }
         } catch (err) {
           //  console.log("catched: ", err.message);
