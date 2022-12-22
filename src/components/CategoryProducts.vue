@@ -33,7 +33,7 @@
               <v-row>
                 <h4
                   class="white--text"
-                  style="font-size: 14px; font-weight: 400;text-align:left;"
+                  style="font-size: 14px; font-weight: 400;text-align:left;line-height: 14px;"
                 >
                   {{ item.itemname }}
                 </h4>
@@ -158,6 +158,7 @@
           console.log("else");
         }
         console.log(state.cart);
+        localStorage.setItem("cart", JSON.stringify(this.state.cart));
       },
       decrease(state,item) {
         console.log(item._id);
@@ -179,6 +180,7 @@
   
         }
         console.log(state.cart);
+        localStorage.setItem("cart", JSON.stringify(this.state.cart));
       },
       addtocart(item) {
         
@@ -195,6 +197,7 @@
         console.log(this.state.cart);
         console.log("item is" + item.itemname);
         console.log("quantity is" + item.quantity);
+        localStorage.setItem("cart", JSON.stringify(this.state.cart));
       },
     },
   };

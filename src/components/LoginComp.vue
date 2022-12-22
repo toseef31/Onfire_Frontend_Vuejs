@@ -113,6 +113,8 @@ export default {
             console.log(result.data.data.user);
             localStorage.setItem("user-info", JSON.stringify(result.data.data.user));
             setAuthHeader(result.data.token);
+
+            localStorage.setItem("token", result.data.token);
             this.$router.push({ name: "MyProfilePage" });
           }
         }

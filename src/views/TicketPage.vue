@@ -1,5 +1,6 @@
 <template>
-    <div>
+  <div style="height: auto;min-height: 100vh;
+    background-color: #1D2939;">
       
       <VenuPageHeader/>
       <TicketComp/>
