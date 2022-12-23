@@ -13,17 +13,12 @@
   
        <h3 class="ml-4">{{ $route.meta.title }}</h3>
        <v-spacer></v-spacer>
-       
-       <router-link to="/CartPage"><v-badge
-        bordered
-        color="#EF7E35"
-        content="0"
-        overlap
-      
-      >
+       <p class="black--text" style="font-size:12px;margin-top: 4px;margin-right: -28px !important;
+    z-index: 10;">{{ quantity }}</p>
+       <router-link to="/CartPage">
         
         <img width="100%" src="@/assets/Cart.png" />
-  </v-badge>
+ 
 </router-link>
       </v-toolbar>
      
@@ -35,7 +30,20 @@
 <script>
 export default {
     name: 'VenuPageHeader',
+    data() {
+    return {
+      quantity:"0",
+     
+    };
+  },
+    created() {
+      this.quantity = JSON.parse(localStorage.getItem("cartquantity"));
+    this.$root.$on("quantity", (data) => {
+    this.quantity=data;
+   });
+  },
 }
+
 </script>
 
 <style scoped>

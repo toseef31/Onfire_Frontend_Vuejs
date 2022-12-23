@@ -16,11 +16,11 @@
         </v-col>
       </v-row>
     </div>
-    <div class="pt-10 pb-16" style="background-color: #475467">
+    <div class="pt-5 pb-8" style="background-color: #475467">
       <v-row  v-for="item in state.cart"
             :key="item.id" class="px-9">
            
-        <v-col cols="1" v-if="item.itemquantity != 0 && item.itemquantity > 0">
+        <v-col cols="1" class="py-2" v-if="item.itemquantity != 0 && item.itemquantity > 0">
           <v-btn
                   class="mr-n3 mt-2"
                   @click="decrease(state,item)"
@@ -38,12 +38,12 @@
                   ></v-btn
                 >
         </v-col>
-        <v-col cols="1" v-if="item.itemquantity != 0 && item.itemquantity > 0">
-          <h3 class="white--text mt-3 ml-n1" style="font-size: 14px">
+        <v-col class="py-2" cols="1" v-if="item.itemquantity != 0 && item.itemquantity > 0">
+          <h3 class="white--text mt-3 ml-n2" style="font-size: 14px">
                   {{ item.itemquantity }}
                 </h3>
         </v-col>
-        <v-col cols="1" v-if="item.itemquantity != 0 && item.itemquantity > 0">
+        <v-col class="py-2" cols="1" v-if="item.itemquantity != 0 && item.itemquantity > 0">
           <v-btn
                   class="ml-n3 mt-2"
                   @click="add(state,item)"
@@ -61,19 +61,19 @@
                   ></v-btn
                 >
         </v-col>
-        <v-col cols="7" class="pa-2">
-          <p class="white--text float-left mt-1">
+        <v-col cols="7" class="px-2 py-0">
+          <p class="white--text float-left mt-3" style="line-height: 14px;">
             {{item.itemname}}
           </p>
         </v-col>
-        <v-col cols="2">
+        <v-col cols="2" class="py-2">
           <h4 class="white--text float-left mt-2">{{item.itemprice}}</h4>
         </v-col>
       </v-row>
       
-      <v-row class="px-4 pb-16">
+      <v-row class="px-4 pb-0">
         <v-col>
-          <h4 class="white--text float-right">General Bar Total: ${{ total }}</h4>
+          <h4 class="white--text float-right">Total: ${{ total }}</h4>
         </v-col>
       </v-row>
     </div>
@@ -124,8 +124,8 @@
           required
         ></v-text-field>
         <p class="white--text float-left mt-1">Discount: $750</p>
-        <v-btn @click="overlay = !overlay" color="#EF7E35" class="px-10 py-8"
-          >PAY FOR YOUR 2 DRINKS - ${{ total }}</v-btn
+        <v-btn @click="pay()" color="#EF7E35" class="px-10 py-8"
+          >PAY FOR YOUR ITEMS - ${{ total }}</v-btn
         >
       </v-col>
 
@@ -135,6 +135,8 @@
 </template>
   
   <script>
+  
+import axios from "axios";
 export default {
   name: "CartComp",
   data() {
@@ -144,7 +146,8 @@ export default {
       overlay: false,
       counter: 0,
       state: {cart: []},
-      total:'0'
+      total:'0',
+      totalquantity:"0",
     };
   },
   mounted() {
@@ -153,6 +156,7 @@ export default {
   methods: {
     async pageload() {
       this.state.cart = JSON.parse(localStorage.getItem("cart"));
+
       console.log(this.state.cart);
       let total = 0;
   this.state.cart.forEach((el) => {
@@ -160,6 +164,24 @@ export default {
   });
   this.total=total;
   console.log("TOTal",total);
+    },
+    async pay() {
+      
+     
+      let result = await axios.post(
+            "http://138.68.27.231:3000/api/v1/order/create-checkout-session",
+            {
+              cartItems:this.state.cart,
+            }
+            
+          ).then(response => {
+                     
+                     window.location.href= response.data.url;
+                     
+                     return response;
+                     
+                   });
+console.log("Result",result);
     },
     add(state, item) {
       console.log(item.id);
@@ -182,6 +204,13 @@ export default {
   });
   this.total=total;
   console.log("TOTal",total);
+  let totalquantity = 0;
+  this.state.cart.forEach((el) => {
+    totalquantity = totalquantity +  el.itemquantity;
+  });
+      console.log("Quantity",totalquantity);
+      this.$root.$emit("quantity", totalquantity);
+      localStorage.setItem("cartquantity", JSON.stringify(totalquantity));
       localStorage.setItem("cart", JSON.stringify(this.state.cart));
     },
     decrease(state,item) {
@@ -211,6 +240,13 @@ export default {
   });
   this.total=total;
   console.log("TOTal",total);
+  let totalquantity = 0;
+  this.state.cart.forEach((el) => {
+    totalquantity = totalquantity - el.itemquantity;
+  });
+      console.log("Quantity",totalquantity);
+      this.$root.$emit("quantity", totalquantity);
+     localStorage.setItem("cartquantity", JSON.stringify(totalquantity));
       localStorage.setItem("cart", JSON.stringify(this.state.cart));
     },
     addtocart(item) {
@@ -230,6 +266,7 @@ export default {
   this.total=total;
   console.log("TOTal",total);
     },
+    
   },
  
 };

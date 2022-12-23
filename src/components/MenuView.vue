@@ -113,8 +113,8 @@ export default {
       counter: 0,
       state: {cart: []},
       products: [],
-      
-     
+      totalquantity:"0",
+    pointname:""
     };
   },
   mounted() {
@@ -129,6 +129,8 @@ export default {
       );
 
       this.products = result.data.data.servicepoint.pointmenu;
+      this.pointname= result.data.data.servicepoint.pointname;
+      console.log(this.pointname);
     },
 
     add(state, item) {
@@ -143,9 +145,21 @@ export default {
         item.quantity += 1;
         console.log("if");
       } else {
-        state.cart.push(item);
+        this.state.cart.push({
+          itemname: item.itemname,
+          itemprice: item.price,
+          itemquantity: item.quantity,
+          id: item._id,
+        });
         console.log("else");
       }
+      let totalquantity = 0;
+  this.state.cart.forEach((el) => {
+    totalquantity = totalquantity +  el.itemquantity;
+  });
+      console.log("Quantity",totalquantity);
+      this.$root.$emit("quantity", totalquantity);
+      localStorage.setItem("cartquantity", JSON.stringify(totalquantity));
       console.log(state.cart);
       localStorage.setItem("cart", JSON.stringify(this.state.cart));
     },
@@ -157,8 +171,9 @@ export default {
       console.log(found);
       if (found) {
         if (found.itemquantity != 0 && item.quantity != 0) {
-          found.itemquantity -= 1;
           item.quantity--;
+          found.itemquantity -= 1;
+          
           console.log("inside if");
         }
         if (found.itemquantity == 0 && item.quantity == 0) {
@@ -168,22 +183,38 @@ export default {
         }
 
       }
+      let totalquantity = 0;
+  this.state.cart.forEach((el) => {
+    totalquantity = totalquantity -  el.itemquantity;
+  });
+      console.log("Quantity",totalquantity);
+      this.$root.$emit("quantity", totalquantity);
+     localStorage.setItem("cartquantity", JSON.stringify(totalquantity));
       console.log(state.cart);
       localStorage.setItem("cart", JSON.stringify(this.state.cart));
     },
     addtocart(item) {
       
       item.quantity += 1;
+     
       // this.addedtocart=!this.addedtocart;
       //this.addcart=index;
       //this.isCart = true;
       this.state.cart.push({
+        pointname:this.pointname,
         itemname: item.itemname,
         itemprice: item.price,
         itemquantity: item.quantity,
         id: item._id,
       });
       console.log(this.state.cart);
+      let totalquantity = 0;
+  this.state.cart.forEach((el) => {
+    totalquantity = totalquantity +  el.itemquantity;
+  });
+      console.log("Quantity",totalquantity);
+      this.$root.$emit("quantity", totalquantity);
+     localStorage.setItem("cartquantity", JSON.stringify(totalquantity));
       console.log("item is" + item.itemname);
       console.log("quantity is" + item.quantity);
       localStorage.setItem("cart", JSON.stringify(this.state.cart));
