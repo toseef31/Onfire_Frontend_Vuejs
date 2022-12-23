@@ -113,8 +113,8 @@
         counter: 0,
         state: {cart: []},
         products: [],
-        
-       
+        totalquantity:"0",
+        pointname:""
       };
     },
     computed :{
@@ -146,7 +146,7 @@
         console.log(item._id);
         console.log("id is" + item._id);
         let found = state.cart.find(
-          (product) => product.id == item._id
+          (product) => product.id == item._id || product.id == item.id
         );
         console.log(found);
         if (found) {
@@ -154,10 +154,22 @@
           item.quantity += 1;
           console.log("if");
         } else {
-          state.cart.push(item);
+          this.state.cart.push({
+          itemname: item.itemname,
+          itemprice: item.price,
+          itemquantity: item.quantity,
+          id: item._id,
+        });
           console.log("else");
         }
         console.log(state.cart);
+        let totalquantity = 0;
+  this.state.cart.forEach((el) => {
+    totalquantity = totalquantity +  el.itemquantity;
+  });
+      console.log("Quantity",totalquantity);
+      this.$root.$emit("quantity", totalquantity);
+      localStorage.setItem("cartquantity", JSON.stringify(totalquantity));
         localStorage.setItem("cart", JSON.stringify(this.state.cart));
       },
       decrease(state,item) {
@@ -180,6 +192,13 @@
   
         }
         console.log(state.cart);
+        let totalquantity = 0;
+  this.state.cart.forEach((el) => {
+    totalquantity = totalquantity -  el.itemquantity;
+  });
+      console.log("Quantity",totalquantity);
+      this.$root.$emit("quantity", totalquantity);
+      localStorage.setItem("cartquantity", JSON.stringify(totalquantity));
         localStorage.setItem("cart", JSON.stringify(this.state.cart));
       },
       addtocart(item) {
@@ -195,8 +214,15 @@
           id: item._id,
         });
         console.log(this.state.cart);
+        let totalquantity = 0;
+  this.state.cart.forEach((el) => {
+    totalquantity = totalquantity +  el.itemquantity;
+  });
+      console.log("Quantity",totalquantity);
+      this.$root.$emit("quantity", totalquantity);
         console.log("item is" + item.itemname);
         console.log("quantity is" + item.quantity);
+        localStorage.setItem("cartquantity", JSON.stringify(totalquantity));
         localStorage.setItem("cart", JSON.stringify(this.state.cart));
       },
     },
