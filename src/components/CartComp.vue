@@ -169,7 +169,7 @@ export default {
       
      
       let result = await axios.post(
-            "http://138.68.27.231:3000/api/v1/ticket/create-checkout-session",
+            "http://138.68.27.231:3000/api/v1/order/create-checkout-session",
             {
               cartItems:this.state.cart,
             }

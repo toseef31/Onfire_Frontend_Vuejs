@@ -115,6 +115,7 @@
         products: [],
         totalquantity:"0",
         pointname:""
+       
       };
     },
     computed :{
@@ -140,6 +141,8 @@
         );
   
         this.products = result.data.data.obj;
+        this.pointname=result.data.data.name;
+        console.log(this.pointname)
       },
   
       add(state, item) {
@@ -155,6 +158,7 @@
           console.log("if");
         } else {
           this.state.cart.push({
+            pointname:this.pointname,
           itemname: item.itemname,
           itemprice: item.price,
           itemquantity: item.quantity,
@@ -208,6 +212,7 @@
         //this.addcart=index;
         //this.isCart = true;
         this.state.cart.push({
+          pointname:this.pointname,
           itemname: item.itemname,
           itemprice: item.price,
           itemquantity: item.quantity,
