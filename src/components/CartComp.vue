@@ -214,41 +214,37 @@ console.log("Result",result);
       localStorage.setItem("cart", JSON.stringify(this.state.cart));
     },
     decrease(state,item) {
-      console.log(item.id);
-      let found = state.cart.find(
-        (product) => product.id == item.id
-      );
-      console.log(found);
-      if (found) {
-        if (found.itemquantity != 0 && item.itemquantity != 0) {
+        console.log(item.id);
+        let found = state.cart.find(
+          (product) => product.id == item.id
+        );
+        let findex = state.cart.findIndex(
+          (product) => product.id == item.id
+        );
+        console.log(findex);
+        if (found) {
+          if (found.itemquantity > 0) {
+            found.itemquantity -= 1;
+            item.quantity--;
+            console.log("inside if");
           
-          item.itemquantity--;
-          console.log("inside if");
-         
+          if (found.itemquantity == 0) {
+            this.state.cart.splice(findex,1);
+  
+            console.log("else inside");
+          }
+          }
         }
-        if (found.itemquantity == 0 && item.itemquantity == 0) {
-          state.cart.splice(item, 1);
-
-          console.log("else inside");
-        }
-
-      }
-      console.log(state.cart);
-      let total = 0;
+        console.log(state.cart);
+        let totalquantity = 0;
   this.state.cart.forEach((el) => {
-    total = total + el.itemprice * el.itemquantity;
-  });
-  this.total=total;
-  console.log("TOTal",total);
-  let totalquantity = 0;
-  this.state.cart.forEach((el) => {
-    totalquantity = totalquantity - el.itemquantity;
+    totalquantity = totalquantity -  el.itemquantity;
   });
       console.log("Quantity",totalquantity);
       this.$root.$emit("quantity", totalquantity);
-     localStorage.setItem("cartquantity", JSON.stringify(totalquantity));
-      localStorage.setItem("cart", JSON.stringify(this.state.cart));
-    },
+      localStorage.setItem("cartquantity", JSON.stringify(totalquantity));
+        localStorage.setItem("cart", JSON.stringify(this.state.cart));
+      },
     addtocart(item) {
       
       item.itemquantity += 1;

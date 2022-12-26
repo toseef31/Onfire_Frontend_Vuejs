@@ -128,12 +128,21 @@
         this.pageload();
     }
   },
+ 
     mounted() {
       this.pageload();
+     
     },
-    
+    created(){
+    if(localStorage.cart.length > 0){
+        this.state.cart = JSON.parse(localStorage.getItem("cart"));
+      }
+  },
     methods: {
       async pageload() {
+       
+      
+        
         let result = await axios.get(
           "http://138.68.27.231:3000/api/v1/service/menubycategory/"+
             this.$route.params.id+"/category/" +
@@ -181,19 +190,22 @@
         let found = state.cart.find(
           (product) => product.id == item._id
         );
-        console.log(found);
+        let findex = state.cart.findIndex(
+          (product) => product.id == item._id
+        );
+        console.log(findex);
         if (found) {
-          if (found.itemquantity != 0) {
+          if (found.itemquantity > 0) {
             found.itemquantity -= 1;
             item.quantity--;
             console.log("inside if");
-          }
+          
           if (found.itemquantity == 0) {
-            state.cart.splice(item, 1);
+            this.state.cart.splice(findex,1);
   
             console.log("else inside");
           }
-  
+          }
         }
         console.log(state.cart);
         let totalquantity = 0;
