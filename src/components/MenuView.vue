@@ -111,7 +111,7 @@ export default {
   data() {
     return {
       counter: 0,
-      state: {cart: []},
+     state: {cart: []},
       products: [],
       totalquantity:"0",
     pointname:""
@@ -120,9 +120,15 @@ export default {
   mounted() {
     this.pageload();
   },
-  
+  created(){
+    if(localStorage.cart.length > 0){
+        this.state.cart = JSON.parse(localStorage.getItem("cart"));
+      }
+  },
   methods: {
     async pageload() {
+      
+      
       let result = await axios.get(
         "http://138.68.27.231:3000/api/v1/service/getservicepoint/" +
           this.$route.params.id
@@ -146,6 +152,7 @@ export default {
         console.log("if");
       } else {
         this.state.cart.push({
+          pointname:this.pointname,
           itemname: item.itemname,
           itemprice: item.price,
           itemquantity: item.quantity,
@@ -164,35 +171,37 @@ export default {
       localStorage.setItem("cart", JSON.stringify(this.state.cart));
     },
     decrease(state,item) {
-      console.log(item._id);
-      let found = state.cart.find(
-        (product) => product.id == item._id
-      );
-      console.log(found);
-      if (found) {
-        if (found.itemquantity != 0 && item.quantity != 0) {
-          item.quantity--;
-          found.itemquantity -= 1;
+        console.log(item._id);
+        let found = state.cart.find(
+          (product) => product.id == item._id
+        );
+        let findex = state.cart.findIndex(
+          (product) => product.id == item._id
+        );
+        console.log(findex);
+        if (found) {
+          if (found.itemquantity > 0) {
+            found.itemquantity -= 1;
+            item.quantity--;
+            console.log("inside if");
           
-          console.log("inside if");
+          if (found.itemquantity == 0) {
+            this.state.cart.splice(findex,1);
+  
+            console.log("else inside");
+          }
+          }
         }
-        if (found.itemquantity == 0 && item.quantity == 0) {
-          state.cart.splice(item, 1);
-
-          console.log("else inside");
-        }
-
-      }
-      let totalquantity = 0;
+        console.log(state.cart);
+        let totalquantity = 0;
   this.state.cart.forEach((el) => {
     totalquantity = totalquantity -  el.itemquantity;
   });
       console.log("Quantity",totalquantity);
       this.$root.$emit("quantity", totalquantity);
-     localStorage.setItem("cartquantity", JSON.stringify(totalquantity));
-      console.log(state.cart);
-      localStorage.setItem("cart", JSON.stringify(this.state.cart));
-    },
+      localStorage.setItem("cartquantity", JSON.stringify(totalquantity));
+        localStorage.setItem("cart", JSON.stringify(this.state.cart));
+      },
     addtocart(item) {
       
       item.quantity += 1;
@@ -214,6 +223,7 @@ export default {
   });
       console.log("Quantity",totalquantity);
       this.$root.$emit("quantity", totalquantity);
+      
      localStorage.setItem("cartquantity", JSON.stringify(totalquantity));
       console.log("item is" + item.itemname);
       console.log("quantity is" + item.quantity);

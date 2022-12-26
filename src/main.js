@@ -9,16 +9,17 @@ import vueCountryRegionSelect from 'vue-country-region-select';
 import setAuthHeader from './utils/setAuthHeader';
 
 
-if(localStorage.token){
+
+if (localStorage.token) {
   setAuthHeader(localStorage.token);
-}else{
+} else {
   setAuthHeader(false);
   console.log("false");
 }
 Vue.use(VueGeolocation);
 Vue.use(vueCountryRegionSelect);
 Vue.config.productionTip = false
-Vue.filter('formatDate', function(value) {
+Vue.filter('formatDate', function (value) {
   if (value) {
     return moment(String(value)).format('DD-MMMM-YYYY HH:MM A')
   }
