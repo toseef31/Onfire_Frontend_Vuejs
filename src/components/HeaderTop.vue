@@ -26,6 +26,7 @@
             >mdi-close</v-icon
           >
         </v-btn>
+        <v-form @submit.prevent="search">
         <v-text-field
           placeholder="search"
           filled
@@ -35,8 +36,10 @@
           background-color="white"
           color="black"
           class="mt-1"
+          v-model="query"
         >
         </v-text-field>
+      </v-form>
       </v-row>
     </v-toolbar>
   </v-card>
