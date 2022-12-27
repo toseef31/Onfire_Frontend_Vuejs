@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="pa-2" style="background-color: #1d2939!important;
-    padding-bottom: 40px!important;">
+    padding-bottom: 70px!important;">
       <div class="px-2 ma-0">
         <v-row class="pa-0 ma-0" style="background-color: #101828">
           <v-col class="px-0 py-0" style="background-color: #1d2939">
@@ -14,12 +14,21 @@
 
       <v-row v-for="item in ticketspurchased"
             :key="item.id" class="pb-1 px-3 mx-2" style="background-color: #344054">
-        <v-col cols="6" class="pa-0 mt-6">
-          <img width="100%" src="@/assets/banner189.png" />
+        <div v-if="item.event._id != ticketcheck" style="display: inherit;">
+            <v-col cols="6" class="pa-0 mt-6">
+          
+              <img
+                  width="100%"
+                  height="90px"
+                  crossorigin="anonymous"
+                  style="border-radius: 3px;"
+                  :src="`http://138.68.27.231:3000/projectdata/eventspic/${item.event.eventimage}`"
+                />
         </v-col>
         <v-col cols="6" class="px-5 mt-6">
-          <v-row>
-            <h3 class="heading" style="font-size: 10px">{{item.event.eventname}}</h3>
+          <v-row >
+            <h3 :set="ticketcheck = item.event._id" class="heading" style="font-size: 10px">{{item.event.eventname}}</h3>
+            
           </v-row>
           <v-row>
             <p class="white--text text-left" style="font-size: 10px">
@@ -33,7 +42,7 @@
           </v-row>
           <v-row>
             <v-col cols="10" class="pa-0">
-              <p class="white--text text-left pb-16" style="font-size: 10px">
+              <p class="white--text text-left pb-1" style="font-size: 10px">
                 Avenida El Salto 5000, Huechuraba, Region Mero politana
               </p>
             </v-col>
@@ -42,6 +51,7 @@
             </v-col>
           </v-row>
         </v-col>
+        </div>
         <div
           style="background-color: #70afe3; border-radius: 12px"
           class="pa-3"
@@ -53,12 +63,16 @@
               <img width="100%" src="@/assets/qr.png" />
             </v-col>
             <v-col cols="7" class="pa-0">
-              <p class="white--text text-left mt-4" style="font-size: 12px">
+              <p class="white--text text-left mt-4 mb-0" style="font-size: 12px">
                {{ item.ticketquantity }} x {{item.ticketname}}
 
               </p>
-              <p class="white--text text-left mt-4" style="font-size: 12px">
+              <p class="white--text text-left mt-0 mb-0" style="font-size: 12px">
                Price x {{item.price}}
+
+              </p>
+              <p class="white--text text-left mt-0" style="font-size: 12px">
+               {{item.status}}
 
               </p>
             </v-col>
@@ -68,7 +82,7 @@
           </v-row>
           </router-link>
         </div>
-        <div
+       <!--<div
           style="background-color: #ef7e35; border-radius: 12px"
           class="pa-3 mt-5"
         >
@@ -85,7 +99,7 @@
             </v-col>
           </v-row>
           </router-link>
-        </div>
+        </div>//-->
       </v-row>
       
       
@@ -101,7 +115,7 @@ export default {
     return {
       name: "",
       ticketspurchased:[],
-      
+      ticketcheck:"",
       id: "",
       ticket:"",
       eventmenu:""
@@ -123,6 +137,7 @@ export default {
       this.event = this.$route.params.id;
       console.log( "event id"+this.event);
     },
+    
   },
 
 };

@@ -124,7 +124,7 @@
           required
         ></v-text-field>
         <p class="white--text float-left mt-1">Discount: $750</p>
-        <v-btn @click="pay()" color="#EF7E35" class="px-10 py-8"
+        <v-btn @click="pay()"  color="#EF7E35" class="px-10 py-8"
           >PAY FOR YOUR ITEMS - ${{ total }}</v-btn
         >
       </v-col>
@@ -152,7 +152,9 @@ export default {
   },
   mounted() {
     this.pageload();
+    
   },
+  
   methods: {
     async pageload() {
       this.state.cart = JSON.parse(localStorage.getItem("cart"));
@@ -166,7 +168,7 @@ export default {
   console.log("TOTal",total);
     },
     async pay() {
-      
+      console.log("paid click")
      
       let result = await axios.post(
             "http://138.68.27.231:3000/api/v1/order/create-checkout-session",
@@ -236,6 +238,12 @@ console.log("Result",result);
           }
         }
         console.log(state.cart);
+        let total = 0;
+  this.state.cart.forEach((el) => {
+    total = total - el.itemprice * el.itemquantity;
+  });
+  this.total=total;
+  console.log("TOTal",total);
         let totalquantity = 0;
   this.state.cart.forEach((el) => {
     totalquantity = totalquantity -  el.itemquantity;
