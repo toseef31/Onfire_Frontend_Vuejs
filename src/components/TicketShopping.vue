@@ -248,34 +248,37 @@ console.log("Result",result);
       //  }
       //   console.log("Total is" + this.total);
     },
-    decrease(state, item) {
-      let found = state.purchasedtickets.find(
-        (product) => product.id == item.id
-      );
-      console.log(found);
-      if (found) {
-        if (found.ticketquantity != 0) {
-          found.ticketquantity -= 1;
-          item.ticketquantity--;
-          console.log("inside if");
+    decrease(state,item) {
+        console.log(item._id);
+        let found = state.purchasedtickets.find(
+          (product) => product.id == item._id
+        );
+        let findex = state.purchasedtickets.findIndex(
+          (product) => product.id == item._id
+        );
+        console.log(findex);
+        if (found) {
+          if (found.ticketquantity > 0) {
+            found.ticketquantity -= 1;
+            item.ticketquantity--;
+            console.log("inside if");
+          
+          if (found.ticketquantity == 0) {
+            this.state.purchasedtickets.splice(findex,1);
+  
+            console.log("else inside");
+          }
+          }
         }
-        if (found.ticketquantity == 0) {
-          state.purchasedtickets.splice(item, 1);
-
-          console.log("else inside");
-        }
-      }
-
-      console.log(state.purchasedtickets);
-      console.log("event id" + this.event);
-      let total = 0;
+        console.log(state.purchasedtickets);
+        let total = 0;
   this.state.purchasedtickets.forEach((el) => {
-    total = total + el.price * el.ticketquantity;
+    total = total - el.price * el.ticketquantity;
   });
   this.total=total;
   console.log("TOTal",total);
-      localStorage.setItem("ticketsordered", JSON.stringify(this.state.purchasedtickets));
-    },
+        localStorage.setItem("cart", JSON.stringify(this.state.purchasedtickets));
+      },
     addtocart(item) {
       console.log("added");
 

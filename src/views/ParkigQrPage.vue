@@ -2,7 +2,7 @@
     <div>
       
       <VenuPageHeader/>
-      <GeneralAdmission/>
+      <GeneralParking/>
       <FooterMain/>
     </div>
   </template>
@@ -10,14 +10,14 @@
   <script>
   // @ is an alias to /src
   import VenuPageHeader from '@/components/VenuPageHeader.vue'
-  import GeneralAdmission from '@/components/GeneralAdmission.vue'
+  import GeneralParking from '@/components/GeneralParking.vue'
   import FooterMain from '@/components/FooterMain.vue'
   
   export default {
-    name: 'TicketPage',
+    name: 'ParkigQrPage',
     components: {
         VenuPageHeader,
-        GeneralAdmission,
+        GeneralParking,
       FooterMain
     }
   }

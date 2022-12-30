@@ -56,8 +56,8 @@
           style="background-color: #70afe3; border-radius: 12px"
           class="pa-3"
         >
-        <router-link to="/GeneralParkingPage"
-        >
+        
+        <router-link :to="`/ParkigQrPage/${item.id}`">
           <v-row>
             <v-col cols="3">
               <img width="100%" src="@/assets/qr.png" />

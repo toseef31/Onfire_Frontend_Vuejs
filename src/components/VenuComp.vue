@@ -4,7 +4,7 @@
 <v-row class="pb-0">
 <v-col>
             <div>
-            <div ><img width="100%" height="100%" style="border-style: none;
+            <div ><img width="100%" height="186px" style="border-style: none;
     border: 1px solid;
     border-radius: 3px;" crossorigin="anonymous" :src="`http://138.68.27.231:3000/projectdata/eventspic/${events.eventimage}`" />
          </div>
@@ -24,18 +24,18 @@
  </v-row>
  </div>
  <v-row  v-show="ticket" style="background-color: #475467;" class="px-4 py-2">
-   <v-col v-show="ticket" cols="6" class="px-1 py-7">
+   <v-col v-show="ticket" cols="6" class="px-1 pb-7 pt-2">
     <router-link :to="`/TicketShoppingPage/${id}`"> <div class="imgstyle"><img width="30%" src="@/assets/ticket-main.png" />
     <h2 class="black--text" style="font-size: 12px;">Buy Tickets</h2></div></router-link>
 </v-col>
-<v-col cols="6"  class="px-1 py-7">
+<v-col cols="6"  class="px-1 pb-7 pt-2">
   <router-link :to="`/ProductPage/${id}`"><div class="imgstyle"><img width="30%" src="@/assets/alcoholic.png" />
     <h2 class="black--text" style="font-size: 12px;">Buy Food & Drinks</h2></div></router-link>
 </v-col>
  </v-row>
  <v-row  v-show="!ticket" style="background-color: #475467;" class="px-4 py-2 ma-0">
    
-<v-col cols="12"  class="px-10 py-7 pt-2">
+<v-col cols="12"  class="px-10 pb-7 pt-2">
   <router-link :to="`/ProductPage/${id}`"><div class="imgstyle"><img width="30%" src="@/assets/alcoholic.png" />
     <h2 class="black--text" style="font-size: 12px;">Buy Food & Drinks</h2></div></router-link>
 </v-col>

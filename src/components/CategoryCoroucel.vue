@@ -58,7 +58,7 @@
         </p>
       </div>
     </v-overlay>
-    <v-row style="background-color: #475467">
+    <v-row style="background-color: #475467" class="xaxis">
       <v-col class="px-6 py-4 xaxis">
         <v-btn
             
