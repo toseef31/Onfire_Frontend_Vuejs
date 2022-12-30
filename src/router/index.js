@@ -19,13 +19,14 @@ import AccountQrPage from '../views/AccountQrPage.vue'
 import MyWalletPage from '../views/MyWalletPage.vue'
 import AccountPurchasePage from '../views/AccountPurchasePage.vue'
 import ModifyProfilePage from '../views/ModifyProfilePage.vue'
-import GeneralParkingPage from '../views/GeneralParkingPage.vue'
-import GeneralAdmissionPage from '../views/GeneralAdmissionPage.vue'
+import ParkigQrPage from '../views/ParkigQrPage.vue'
 import FoodPage from '../views/FoodPage.vue'
 import PizzasPage from '../views/PizzasPage.vue'
 import EventPointPage from '../views/EventPointPage.vue'
 import LoginPage from '../views/LoginPage.vue'
 import UpdatePasswordPage from '../views/UpdatePasswordPage.vue'
+import EventByCategoryPage from '../views/EventByCategoryPage.vue'
+import SearchEventPage from '../views/SearchEventPage.vue'
 
 
 Vue.use(VueRouter)
@@ -35,6 +36,16 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/EventByCategoryPage/:id',
+    name: 'EventByCategoryPage',
+    component: EventByCategoryPage
+  },
+  {
+    path: '/SearchEventPage',
+    name: 'SearchEventPage',
+    component: SearchEventPage
   },
 
   {
@@ -174,21 +185,14 @@ const routes = [
   }
   },
   {
-    path: '/GeneralParkingPage',
-    name: 'GeneralParkingPage',
-    component: GeneralParkingPage,
+    path: '/ParkigQrPage/:id',
+    name: 'ParkigQrPage',
+    component: ParkigQrPage,
     meta: {
-      title: 'General Parking'
+      title: 'Parking Qr'
   }
   },
-  {
-    path: '/GeneralAdmissionPage',
-    name: 'GeneralAdmissionPage',
-    component: GeneralAdmissionPage,
-    meta: {
-      title: 'General Admission'
-  }
-  },
+  
   {
     path: '/FoodPage/food/:id',
     name: 'FoodPage',

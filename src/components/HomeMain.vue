@@ -142,7 +142,8 @@ export default {
       opacity: 0,
       overlay: true,
       location: false,
-      name:""
+      name:"",
+      query:"test"
     };
   },
  
@@ -215,6 +216,9 @@ export default {
       );
       console.log(result.data.data.events[0].eventname);
       this.events = result.data.data.events;
+
+      let search = await axios.get(`http://138.68.27.231:3000/api/v1/events/getall?search=${this.query}`);
+      console.log("searched", search.data.data.events);
       
     },
     }
