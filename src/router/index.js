@@ -25,8 +25,6 @@ import PizzasPage from '../views/PizzasPage.vue'
 import EventPointPage from '../views/EventPointPage.vue'
 import LoginPage from '../views/LoginPage.vue'
 import UpdatePasswordPage from '../views/UpdatePasswordPage.vue'
-import EventByCategoryPage from '../views/EventByCategoryPage.vue'
-import SearchEventPage from '../views/SearchEventPage.vue'
 
 
 Vue.use(VueRouter)
@@ -37,16 +35,8 @@ const routes = [
     name: 'home',
     component: HomeView
   },
-  {
-    path: '/EventByCategoryPage/:id',
-    name: 'EventByCategoryPage',
-    component: EventByCategoryPage
-  },
-  {
-    path: '/SearchEventPage',
-    name: 'SearchEventPage',
-    component: SearchEventPage
-  },
+  
+  
 
   {
     path: '/TodayHome',

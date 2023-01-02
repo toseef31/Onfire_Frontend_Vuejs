@@ -114,7 +114,7 @@
         state: {cart: []},
         products: [],
         totalquantity:"0",
-        pointname:""
+        pointname:"",
        
       };
     },
@@ -152,6 +152,9 @@
         this.products = result.data.data.obj;
         this.pointname=result.data.data.name;
         console.log(this.pointname)
+        
+
+       
       },
   
       add(state, item) {
