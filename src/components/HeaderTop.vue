@@ -17,7 +17,7 @@
           <v-icon>mdi-chevron-down</v-icon></v-btn
         >
         <v-btn icon>
-          <v-icon @click="setMessage()" class="mr-n3">mdi-magnify</v-icon>
+          <v-icon @click="magnify = !magnify && setMessage()" class="mr-n3">mdi-magnify</v-icon>
         </v-btn>
       </v-row>
       <v-row class="mt-16 pt-3" v-if="!magnify">
@@ -54,15 +54,16 @@
           ></router-link>
         <div v-for="item in category"
             :key="item.id">
-            <router-link :to="`/EventByCategoryPage/${item._id}`">
+            
           <v-btn
+          @click="cat(item._id)"
             :class="`elevation-${hover ? 54 : 14}`"
             class="ma-1 slidebut"
             color="#E4E7EC"
             style="width: 96px; font-size: 12px; height: 52px;text-transform: none;color:black;"
             >{{item.name}}</v-btn
           >
-      </router-link>
+      
       </div>
       </v-col>
     </v-row>
@@ -79,7 +80,8 @@ export default {
     return {
       magnify: true,
       category: [],
-      query:""
+      query:"",
+      ID:""
     };
   },
   mounted() {
@@ -98,14 +100,20 @@ export default {
 
       
     },
+    cat(_id){
+      console.log(_id);
+      this.$root.$emit('ID',_id);
+    },
     setMessage(){
       console.log(this.query);
-      this.$router.push({
-        path: '/SearchEventPage',
-    name: 'SearchEventPage',
+     // this.$router.push({
+    //    path: '/SearchEventPage',
+   // name: 'SearchEventPage',
   
-});
-this.magnify = !this.magnify;
+//});
+
+      this.$root.$emit('query', this.query);
+    
     }
   },
 };
