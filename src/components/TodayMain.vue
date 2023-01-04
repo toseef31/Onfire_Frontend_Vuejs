@@ -40,16 +40,30 @@ export default {
   data() {
     return {
       events: [],
+      cat:false,
       city: "",
       country: "",
+      lng:0,
+      lat:0,
     };
   },
+  watch: {
+    '$route': function() {
+        this.pageload();
+    }
+  },
+ 
+
 
   mounted() {
     this.pageload();
 
     this.city = JSON.parse(localStorage.getItem("city"));
     this.country = JSON.parse(localStorage.getItem("country"));
+    this.lng = JSON.parse(localStorage.getItem("lng"));
+    this.lat = JSON.parse(localStorage.getItem("lat"));
+    console.log(this.lng);
+    console.log(this.lat);
     console.log(this.city);
     console.log(this.country);
     try {
@@ -77,11 +91,21 @@ export default {
   },
   methods: {
     async pageload() {
+      this.$root.$emit('cat', false);
+      if(this.lng!=0){
       let result = await axios.get(
         "http://138.68.27.231:3000/api/v1/venues/getallvenue"
       );
-      console.log(result.data.data.data);
+      console.log("all",result.data.data.data);
       this.events = result.data.data.data;
+      }
+      else{
+      let bylnglat = await axios.get(
+        `http://138.68.27.231:3000/api/v1/venues/distances/${this.lng},${this.lat}/unit/mi`
+      );
+      console.log("by lng and lat",bylnglat.data.data.data);
+      this.events = bylnglat.data.data.data;
+      }
     },
   },
 };
