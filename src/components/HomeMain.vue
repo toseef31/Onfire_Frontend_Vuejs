@@ -24,6 +24,7 @@
             style="font-size: 14px !important"
             color="#EF7E35"
             class="py-6 text-h4 black--text"
+            @click="sharelocation()"
           >
             ACTIVATE LOCATION SHARING
           </v-btn>
@@ -69,9 +70,10 @@
             In which country and city do you want to see what's happening
           </p>
 
+        
           <country-select
             v-model="country"
-            :country="country"
+          
             countryName="true"
             placeholder="Country"
             class="loc"
@@ -150,32 +152,43 @@ export default {
       coordinates: {
         lng: 0,
         lat: 0,
-        city: "",
+        
       },
       events: [],
       magnify: true,
-      country: "",
+      lng: 0,
+      lat:0,
       region: "",
       n: "",
       absolute: true,
       opacity: 0,
       overlay: true,
       location: false,
+      country:"",
+      
       name: "",
       ID:"",
       query: "",
+      cat:true
     };
   },
-
+  watch: {
+    '$route': function() {
+        this.pageload();
+    }
+  },
   created() {
-    this.$getLocation({})
-      .then((coordinates) => {
-        console.log(coordinates);
-      })
-      .catch((error) => alert(error));
+    this.$root.$emit('cat', true);
     this.pageload();
 
     let cityname = localStorage.getItem("city");
+    let lng = localStorage.getItem("lng");
+    if (lng) {
+      this.location = false;
+      this.overlay = false;
+      
+    }
+    
     if (cityname) {
       this.location = false;
       this.overlay = false;
@@ -183,6 +196,21 @@ export default {
     }
   },
   methods: {
+    sharelocation(){
+      console.log("sharelocation");
+      this.$getLocation({})
+      .then((coordinates) => {
+        console.log(coordinates);
+        this. lng= coordinates.lng;
+        console.log("longitude is",this. lng);
+        this.lat= coordinates.lat;
+        console.log("latitude is",this.lat);
+        localStorage.setItem("lng", JSON.stringify(this.lng));
+      localStorage.setItem("lat", JSON.stringify(this.lat));
+      this.close();
+      })
+      .catch((error) => alert(error));
+    },
     locat() {
       this.location = !this.location;
       localStorage.setItem("city", JSON.stringify(this.region));
@@ -226,6 +254,7 @@ export default {
       this.location = false;
     },
     async pageload() {
+      
       let result = await axios.get(
         "http://138.68.27.231:3000/api/v1/events/getall"
       );

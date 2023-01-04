@@ -20,7 +20,28 @@
           <v-icon @click="magnify = !magnify && setMessage()" class="mr-n3">mdi-magnify</v-icon>
         </v-btn>
       </v-row>
-      <v-row class="mt-16 pt-3" v-if="!magnify">
+      <v-row v-if="cate==false && !magnify" class="mt-5 pt-0" style="background-color:  #101828;">
+        <v-btn class="searchicon mt-3 mr-4 ml-2" icon>
+          <v-icon @click="magnify = !magnify" class="ma-0" color="black"
+            >mdi-close</v-icon
+          >
+        </v-btn>
+        <v-form style="width:85%;">
+        <v-text-field
+          placeholder="search"
+          filled
+          light
+          dense
+          append-icon="mdi-magnify"
+          background-color="white"
+          color="black"
+          class="mt-1"
+          v-model="query" v-on:input="setMessage"
+        >
+        </v-text-field>
+      </v-form>
+      </v-row>
+      <v-row v-if="cate==true && !magnify" class="mt-16 pt-3" style="background-color:  #101828;margin-top: 64px;">
         <v-btn class="searchicon mt-3 mr-4 ml-2" icon>
           <v-icon @click="magnify = !magnify" class="ma-0" color="black"
             >mdi-close</v-icon
@@ -40,7 +61,7 @@
         >
         </v-text-field>
       </v-form>
-      <v-row style="background-color:  #101828;" class="mt-n7 xaxis">
+      <v-row  style="background-color:  #101828;" class="mt-n7 xaxis">
       <v-col class="px-6 py-4 xaxis">
         <router-link to="/"
           >
@@ -81,23 +102,38 @@ export default {
       magnify: true,
       category: [],
       query:"",
-      ID:""
+      ID:"",
+      cate:true
     };
   },
   mounted() {
     this.pageload();
     console.alert("i am in");
   },
+  watch: {
+    '$route': function() {
+        this.pageload();
+    }
+  },
  
     methods: {
+      
     async pageload() {
+      this.$root.$on("cat", async (data) => {
+       
+        
+       this.cate=data;
+        
+       console.log("data",this.cate);
+      });
       let result = await axios.get(
         "http://138.68.27.231:3000/api/v1/category/getcategories/event"
       );
 
       this.category = result.data[0].subcategories;
-      console.log(this.category);
-
+      console.log("cat",this.category);
+    
+    
       
     },
     cat(_id){
