@@ -113,14 +113,14 @@
         </v-col>
       </v-row>
 
-      <v-row class="px-3 py-0" style="background-color: #1d2939">
-        <v-col cols="6" v-for="item in events" :key="item.id">
+      <v-row class="px-5 py-3 mt-3 justify-center " style="background-color: #1d2939;">
+        <v-col cols="5" offset="3" class="colum mt-3 .justify-center"  v-for="item in events" :key="item.id">
           <router-link :to="`/VenuPage/${item.id}`">
-            <div class="colum">
+            
               <div class="gallery">
                 <img
                   width="100%"
-                  height="90px"
+                  height="100%"
                   crossorigin="anonymous"
                   :src="`http://138.68.27.231:3000/projectdata/eventspic/${item.eventimage}`"
                 />
@@ -135,7 +135,7 @@
               <p class="white--text text-left" style="font-size: 10px">
                 {{ item.venue.venuename }}
               </p>
-            </div>
+            
           </router-link>
         </v-col>
       </v-row>
@@ -175,9 +175,18 @@ export default {
   watch: {
     '$route': function() {
         this.pageload();
-    }
+    },
+    
   },
   created() {
+    this.$root.$on("change", async (data) => {
+       
+        if(data==true){
+          this.change();
+        }
+       
+        
+      });
     this.$root.$emit('cat', true);
     this.pageload();
 
@@ -219,9 +228,11 @@ export default {
     },
     async loga() {
       console.log("i am in");
-
+      
       console.log(this.country);
       console.log(this.region);
+      this.$root.$emit('region', this.region);
+      console.log("reg",this.region)
       try {
         let result = await axios.get(
           `http://138.68.27.231:3000/api/v1/events/getallbycity?search=${this.region},${this.country}`
@@ -248,6 +259,8 @@ export default {
     change() {
       this.overlay = false;
       this.location = true;
+      
+     
     },
     close() {
       this.overlay = false;
@@ -301,7 +314,10 @@ export default {
 a {
   text-decoration: none !important;
 }
-
+.col-5 {
+    flex: 0 0 45.666667%;
+    max-width: 50.666667%;
+}
 p,
 h1,
 h2,
@@ -321,6 +337,7 @@ h5 {
   background-color: #344054;
   border-radius: 4px;
   padding: 6px 6px 2px 6px !important;
+  margin: 10px 4px 10px 4px!important;
 }
 .gallery {
   background-color: white;

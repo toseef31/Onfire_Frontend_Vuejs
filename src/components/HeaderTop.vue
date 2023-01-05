@@ -10,10 +10,10 @@
 
         <v-spacer></v-spacer>
 
-        <v-btn
+        <v-btn @click="country()" v-if="this.region"
           class="px-0 mt-2 white--text transparent text-transform-lowercase"
           :elevation="n - 1"
-          ><v-icon color="#EF7E35">mdi-map-marker-outline</v-icon>Santiago
+          ><v-icon color="#EF7E35">mdi-map-marker-outline</v-icon>{{this.region}}
           <v-icon>mdi-chevron-down</v-icon></v-btn
         >
         <v-btn icon>
@@ -47,7 +47,7 @@
             >mdi-close</v-icon
           >
         </v-btn>
-        <v-form style="width:70%;">
+        <v-form style="width:84%;">
         <v-text-field
           placeholder="search"
           filled
@@ -103,12 +103,16 @@ export default {
       category: [],
       query:"",
       ID:"",
-      cate:true
+      cate:true,
+      change:false,
+      region:""
     };
   },
   mounted() {
     this.pageload();
     console.alert("i am in");
+    
+
   },
   watch: {
     '$route': function() {
@@ -118,7 +122,18 @@ export default {
  
     methods: {
       
+      
     async pageload() {
+      
+      
+      this.$root.$on("region", async (data) => {
+       console.log("region selected",data);
+      this.region=data;
+
+      
+       
+     });
+     this.region = JSON.parse(localStorage.getItem("city"));
       this.$root.$on("cat", async (data) => {
        
         
@@ -150,7 +165,12 @@ export default {
 
       this.$root.$emit('query', this.query);
     
-    }
+    },
+    country(){
+      console.log("country");
+      this.$root.$emit('change', true);
+    },
+    
   },
 };
 </script>

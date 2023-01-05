@@ -14,12 +14,12 @@
       </v-row>
       <v-row class="px-3 pt-0 pb-0" style="background-color: #1d2939">
         <v-col cols="6" v-for="item in events" :key="item.id">
-          <router-link :to="`/EventPage/${item.id}`">
+          <router-link :to="`/EventPage/${item._id}`">
             <div class="colum">
               <div>
                 <img
                   crossorigin="anonymous"
-                  height="90px"
+                  height="100%"
                   width="100%"
                   :src="`http://138.68.27.231:3000/projectdata/venuepic/${item.venueimage}`"
                 />

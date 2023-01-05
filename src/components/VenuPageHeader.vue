@@ -32,7 +32,7 @@ export default {
     name: 'VenuPageHeader',
     data() {
     return {
-      quantity:"0",
+      quantity:0,
      
     };
   },

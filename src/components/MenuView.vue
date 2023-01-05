@@ -13,7 +13,7 @@
           </div>
         </v-col>
       </v-row>
-      <v-row class="px-2 py-2 pb-10">
+      <v-row class="px-2 py-2 pb-10 justify-center ">
         <v-col
           cols="4"
           class="px-1 py-1 .justify-center im"

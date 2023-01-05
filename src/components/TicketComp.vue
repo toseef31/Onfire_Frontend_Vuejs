@@ -14,12 +14,12 @@
 
       <v-row v-for="item in ticketspurchased"
             :key="item.id" class="pb-1 px-3 mx-2" style="background-color: #344054">
-        <div v-if="item.event._id != ticketcheck" style="display: inherit;">
+        <div v-if="item.event._id != ticketcheck" style="display: inherit; width:100%;">
             <v-col cols="6" class="pa-0 mt-6">
           
               <img
                   width="100%"
-                  height="90px"
+                  height="100%px"
                   crossorigin="anonymous"
                   style="border-radius: 3px;"
                   :src="`http://138.68.27.231:3000/projectdata/eventspic/${item.event.eventimage}`"
@@ -53,8 +53,8 @@
         </v-col>
         </div>
         <div
-          style="background-color: #70afe3; border-radius: 12px"
-          class="pa-3"
+          style="background-color: #70afe3; border-radius: 12px;width:100%"
+          class="pa-3 mt-5"
         >
         
         <router-link :to="`/ParkigQrPage/${item.id}`">
