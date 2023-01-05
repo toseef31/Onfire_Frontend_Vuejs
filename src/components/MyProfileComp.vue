@@ -1,6 +1,6 @@
 <template>
   <v-form v-model="valid">
-    <v-container style="background-color: #d0d5dd" class="px-9 py-10">
+    <v-container style="background-color: #d0d5dd;overflow: hidden;" class="px-9 py-10">
       <v-row class="px-4 py-2 pb-4">
         <v-col cols="6" class="pa-0"
           ><h4 class="text-left black-color">{{ this.name }}</h4></v-col

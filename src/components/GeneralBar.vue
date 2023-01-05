@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="pa-4" style="background-color: #1d2939">
+    <div class="pa-4" style="background-color: #1d2939;overflow: hidden!important;">
       <v-row class="pb-0">
         <v-col class="pb-1">
           <div class="pb-16 mt-1">
@@ -31,7 +31,7 @@
         </v-col>
       </v-row>
     </div>
-    <v-row class="px-7 py-4 pb-16">
+    <v-row class="px-7 py-4 pb-16 justify-center ">
       <v-col
         cols="3"
         class=" imgstyle .justify-center"
