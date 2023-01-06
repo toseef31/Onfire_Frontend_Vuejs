@@ -1,6 +1,6 @@
 <template>
     <div style="height: auto;
-    min-height: 100vh;background-color: #475467">
+    min-height: 100vh;background-color: #475467;overflow: hidden;">
       
       <VenuPageHeader/>
       <CategoryCoroucel/>

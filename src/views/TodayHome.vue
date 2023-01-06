@@ -1,6 +1,6 @@
 <template>
     <div style="height: auto;min-height: 100vh;
-    background-color:#101828;">
+    background-color:#101828;overflow: hidden;">
       
       <HeaderTop/>
       <CoroucelComp/>

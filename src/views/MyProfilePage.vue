@@ -1,6 +1,6 @@
 <template>
     <div style="background-color:#475467;height: auto;
-    min-height: 100vh;">
+    min-height: 100vh;overflow: hidden;">
       
       <VenuPageHeader/>
       <MyProfileComp/>

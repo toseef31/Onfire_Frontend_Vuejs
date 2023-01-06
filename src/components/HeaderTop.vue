@@ -47,7 +47,7 @@
             >mdi-close</v-icon
           >
         </v-btn>
-        <v-form style="width:84%;">
+        <v-form style="width:72%;">
         <v-text-field
           placeholder="search"
           filled
