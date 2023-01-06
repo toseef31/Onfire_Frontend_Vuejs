@@ -5,7 +5,7 @@
         :absolute="absolute"
         :opacity="opacity"
         :value="overlay"
-        style="margin-top: -20%"
+        style="margin-top: -68%"
       >
         <div
           class="px-1 py-5 mx-5"
@@ -29,7 +29,7 @@
             ACTIVATE LOCATION SHARING
           </v-btn>
           <p
-            style="font-size: 14px !important"
+            style="font-size: 14px !important;cursor: pointer;"
             block
             color="rgb(239 126 53 / 0%)"
             class="
@@ -59,7 +59,7 @@
         :absolute="absolute"
         :opacity="opacity"
         :value="location"
-        style="margin-top: -20%"
+        style="margin-top: -68%"
       >
         <div
           class="px-1 py-5 mx-5"
@@ -77,6 +77,7 @@
             countryName="true"
             placeholder="Country"
             class="loc"
+            style="cursor: pointer;"
           />
           <region-select
             v-model="region"
@@ -87,14 +88,16 @@
             :region="region"
             placeholder="City"
             class="loc"
+            style="cursor: pointer;"
           />
 
           <p
-            style="font-size: 14px !important"
+            style="font-size: 14px !important;cursor: pointer!important;"
             block
             color="rgb(239 126 53 / 0%)"
             class="py-2 text-h4 white--text mb-0 text-center"
             @click="close"
+            
           >
             Cancel
           </p>
@@ -113,8 +116,9 @@
         </v-col>
       </v-row>
 
-      <v-row class="px-5 py-3 mt-3 justify-center " style="background-color: #1d2939;">
-        <v-col cols="5" offset="3" class="colum mt-3 .justify-center"  v-for="item in events" :key="item.id">
+      <v-row class="px-5 py-3 mt-3 gx-5" style="display: flex;
+    justify-content: space-between;background-color: #1d2939;">
+        <v-col cols="6" class="colum mt-3"  v-for="item in events" :key="item.id">
           <router-link :to="`/VenuPage/${item.id}`">
             
               <div class="gallery">
@@ -132,7 +136,7 @@
               >
                 {{ item.Dates | formatDate }}
               </p>
-              <p class="white--text text-left" style="font-size: 10px">
+              <p class="white--text text-left mb-0" style="font-size: 10px">
                 {{ item.venue.venuename }}
               </p>
             
@@ -165,7 +169,7 @@ export default {
       overlay: true,
       location: false,
       country:"",
-      
+      city:"",
       name: "",
       ID:"",
       query: "",
@@ -211,6 +215,7 @@ export default {
       .then((coordinates) => {
         console.log(coordinates);
         this. lng= coordinates.lng;
+        
         console.log("longitude is",this. lng);
         this.lat= coordinates.lat;
         console.log("latitude is",this.lat);
@@ -336,8 +341,7 @@ h5 {
 .colum {
   background-color: #344054;
   border-radius: 4px;
-  padding: 6px 6px 2px 6px !important;
-  margin: 10px 4px 10px 4px!important;
+  flex-basis: 49.5%;
 }
 .gallery {
   background-color: white;

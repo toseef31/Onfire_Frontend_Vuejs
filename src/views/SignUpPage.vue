@@ -1,6 +1,6 @@
 <template>
     <div style="height: auto;
-    min-height: 100vh;background-color:#D0D5DD;">
+    min-height: 100vh;background-color:#D0D5DD;overflow: hidden;">
       
       <VenuPageHeader/>
       <SignUpComp/>

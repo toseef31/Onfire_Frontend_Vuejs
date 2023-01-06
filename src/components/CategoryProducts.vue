@@ -66,7 +66,8 @@
                       width: 14px;
                       height: 21px;
                       padding: 0px 10px;
-                      float: right;
+                      float: left;
+                    margin-left:-10px;
                     "
                     ><v-icon color="#EF7E35" style="font-size: 21px"
                       >mdi-minus</v-icon
@@ -90,6 +91,7 @@
                       height: 21px;
                       padding: 0px 10px;
                       float: right;
+                    margin-right:-10px;
                     "
                     ><v-icon color="#EF7E35" style="font-size: 21px"
                       >mdi-plus</v-icon

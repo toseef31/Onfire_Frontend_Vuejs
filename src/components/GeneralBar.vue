@@ -31,10 +31,11 @@
         </v-col>
       </v-row>
     </div>
-    <v-row class="px-7 py-4 pb-16 justify-center ">
+    <v-row class="px-7 py-4 pb-16 " style="display: flex;
+    justify-content: space-between;">
       <v-col
         cols="3"
-        class=" imgstyle .justify-center"
+        class=" imgstyle"
         
         v-for="item in events.servicepoint"
         :key="item.id"
@@ -43,7 +44,7 @@
           
           <div>
             <img
-              width="40%" height="40px!important"
+              width="40%" height="100%!important"
               crossorigin="anonymous"
               :src="`http://138.68.27.231:3000/projectdata/servicepoint/${item.pointimage}`"
             />
@@ -62,7 +63,7 @@
         <router-link :to="`/TicketShoppingPage/${id}`">
           
             <img width="40%"
-              height="40px" src="@/assets/ticket-main.png" />
+              height="auto" src="@/assets/ticket-main.png" />
             
             <h6 class="black--text .justify-center" style="font-size:12px;">Tickets</h6>
             
@@ -78,7 +79,7 @@
         <router-link :to="`/FoodPage/food/${id}`">
           
             <img width="40%"
-              height="40px" src="@/assets/truck.png" />
+              height="auto" src="@/assets/truck.png" />
             
             <h6 class="black--text .justify-center" style="font-size:12px;">Food</h6>
             
@@ -135,6 +136,7 @@ export default {
   background-color: #d0d5dd;
   margin: 20px 17px 20px 10px ;
   box-shadow: 2px 2px 5px black;
+  flex-basis: 33%;
  
 }
 </style>

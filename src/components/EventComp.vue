@@ -19,14 +19,15 @@
         </v-col>
       </v-row>
 
-      <v-row class="px-3 py-0" style="background-color: #1d2939">
-        <v-col cols="6" v-for="item in events" :key="item.id">
+      <v-row class="px-5 py-3 mt-3 gx-5" style="display: flex;
+    justify-content: space-between;background-color: #1d2939;">
+        <v-col cols="6" class="colum mt-3"  v-for="item in events" :key="item.id">
           <router-link :to="`/VenuPage/${item.id}`">
-            <div class="colum">
+            
               <div class="gallery">
                 <img
                   width="100%"
-                  height="90px"
+                  height="100%"
                   crossorigin="anonymous"
                   :src="`http://138.68.27.231:3000/projectdata/eventspic/${item.eventimage}`"
                 />
@@ -41,7 +42,7 @@
               <p class="white--text text-left" style="font-size: 10px">
                 {{ item.venue.venuename }}
               </p>
-            </div>
+            
           </router-link>
         </v-col>
       </v-row>
@@ -103,7 +104,7 @@ h5 {
 .colum {
   background-color: #344054;
   border-radius: 4px;
-  padding: 6px 6px 2px 6px !important;
+  flex-basis: 49.5%;
 }
 .gallery {
   background-color: white;

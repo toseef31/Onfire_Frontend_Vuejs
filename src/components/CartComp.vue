@@ -31,7 +31,8 @@
                     width: 14px;
                     height: 21px;
                     padding: 0px 10px;
-                    float: right;
+                    float: left;
+                    margin-left:-10px;
                   "
                   ><v-icon color="#EF7E35" style="font-size: 21px"
                     >mdi-minus</v-icon
@@ -39,7 +40,7 @@
                 >
         </v-col>
         <v-col class="py-2" cols="1" v-if="item.itemquantity != 0 && item.itemquantity > 0">
-          <h3 class="white--text mt-3 ml-n2" style="font-size: 14px">
+          <h3 class="white--text mt-2 " style="font-size: 14px">
                   {{ item.itemquantity }}
                 </h3>
         </v-col>
@@ -55,6 +56,7 @@
                     height: 21px;
                     padding: 0px 10px;
                     float: right;
+                    margin-right:-10px;
                   "
                   ><v-icon color="#EF7E35" style="font-size: 21px"
                     >mdi-plus</v-icon
@@ -62,7 +64,7 @@
                 >
         </v-col>
         <v-col cols="7" class="px-2 py-0">
-          <p class="white--text float-left mt-3" style="line-height: 14px;">
+          <p class="white--text float-left mt-5" style="line-height: 14px;">
             {{item.itemname}}
           </p>
         </v-col>
